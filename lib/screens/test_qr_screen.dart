@@ -217,7 +217,7 @@ class _PrettyQrSettings extends StatefulWidget {
   static PrettyQrDecorationImage kDefaultQrDecorationImage =
       const PrettyQrDecorationImage(
     image: AssetImage(AppAssets.imgFlutter),
-    position: PrettyQrDecorationImagePosition.embedded,
+    // position: PrettyQrDecorationImagePosition.embedded,
     scale: 0.3,
   );
 
@@ -227,6 +227,7 @@ class _PrettyQrSettings extends StatefulWidget {
   const _PrettyQrSettings({
     required this.decoration,
     this.onChanged,
+    // ignore: unused_element
     this.onExportPressed,
   });
 
