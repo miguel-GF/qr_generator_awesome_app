@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 
 import '/app_assets.dart';
 import '/screens/home_screen.dart';
+import '/utils/util_app.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,6 +19,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
+    UtilApp.changeInitialTheme();
     _controller = AnimationController(vsync: this);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       _controller.addStatusListener((status) {

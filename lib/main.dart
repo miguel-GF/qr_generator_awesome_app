@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.rightToLeft,
       title: 'QR AWESOME GENERATOR',
       theme: lightTheme,
+      darkTheme: darkTheme,
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
       builder: (BuildContext context, Widget? widget) {
