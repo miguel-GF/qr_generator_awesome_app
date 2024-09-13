@@ -39,7 +39,7 @@ linter:
     #argument_type_not_assignable: false
     type_annotate_public_apis: false
     avoid_void_async: false
-    prefer_null_aware_operators: false
+    prefer_null_aware_operators: true
     avoid_positional_boolean_parameters: false
 
     # Good packages document everything
@@ -50,3 +50,7 @@ linter:
   
     # Back to the 80s
     lines_longer_than_80_chars: true
+    # Reglas para evitar redundancias o malas prácticas comunes
+    avoid_redundant_argument_values: true
+    avoid_unnecessary_containers: true
+    unnecessary_new: true
