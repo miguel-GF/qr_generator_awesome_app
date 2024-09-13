@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'screens/error_screen.dart';
 import 'screens/splash_screen.dart';
+import '/themes/app_theme.dart';
 
 // ignore: avoid_void_async
 void main() async {
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       defaultTransition: Transition.rightToLeft,
       title: 'QR AWESOME GENERATOR',
-      // theme: appThemeData,
+      theme: lightTheme,
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
       builder: (BuildContext context, Widget? widget) {
