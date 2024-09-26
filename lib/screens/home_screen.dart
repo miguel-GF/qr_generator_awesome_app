@@ -1,5 +1,6 @@
 import 'package:bottom_bar/bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import '/utils/util_app.dart';
 import '/themes/colors_palette.dart';
 import '/screens/home/home_favorites_widget.dart';
@@ -50,13 +51,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomBarItem(
             icon: const Icon(Icons.favorite),
-            title: const Text('Favoritos'),
+            title: Text('tabFavorites'.tr),
             activeColor: Colors.red,
             inactiveColor: UtilApp.isDarkMode() ? crSecondary : crSecondaryDark,
           ),
           BottomBarItem(
             icon: const Icon(Icons.settings),
-            title: const Text('Settings'),
+            title: Text('tabSettings'.tr),
             activeColor: UtilApp.isDarkMode() ? crPrimary : crPrimaryDark,
             inactiveColor: UtilApp.isDarkMode() ? crSecondary : crSecondaryDark,
           ),

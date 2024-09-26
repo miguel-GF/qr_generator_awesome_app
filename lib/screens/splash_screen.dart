@@ -20,6 +20,7 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     UtilApp.changeInitialTheme();
+    UtilApp.changeInitialLocale();
     _controller = AnimationController(vsync: this);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       _controller.addStatusListener((status) {

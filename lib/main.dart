@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'screens/error_screen.dart';
 import 'screens/splash_screen.dart';
 import '/themes/app_theme.dart';
+import 'utils/l10n.dart';
 
 // ignore: avoid_void_async
 void main() async {
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
             ErrorScreen(errorDetails: errorDetails);
         return widget!;
       },
+      translations: L10n(),
       // getPages: pages,
       // routingCallback: (routing) => PagesRoutes.fnRoutingCallback(routing!),
     );

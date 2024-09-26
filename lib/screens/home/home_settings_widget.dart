@@ -6,15 +6,19 @@ class HomeSettingsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Center(
+        const Center(
           child: Text('Settings'),
         ),
-        TextButton(
+        const TextButton(
           onPressed: UtilApp.changeTheme,
           child: Text('cambiar tema'),
+        ),
+        TextButton(
+          onPressed: () => UtilApp.changeLocale('en_US'),
+          child: const Text('cambiar idioma'),
         ),
       ],
     );
