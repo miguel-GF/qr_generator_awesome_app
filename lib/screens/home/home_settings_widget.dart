@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qr_awesome_generator/utils/util_app.dart';
+import '/utils/util_app.dart';
+import '/widgets/home/switch_theme_widget.dart';
 
 class HomeSettingsWidget extends StatelessWidget {
   const HomeSettingsWidget({super.key});
@@ -9,12 +10,13 @@ class HomeSettingsWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Center(
-          child: Text('Settings'),
-        ),
-        const TextButton(
-          onPressed: UtilApp.changeTheme,
-          child: Text('cambiar tema'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            SwitchThemeWidget(
+              key: UniqueKey(),
+            ),
+          ],
         ),
         TextButton(
           onPressed: () => UtilApp.changeLocale('en_US'),
