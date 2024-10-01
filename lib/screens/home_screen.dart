@@ -17,6 +17,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentPage = 0;
   final _pageController = PageController();
+
+  Widget baseLayout({required Widget widget}) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      child: widget,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,10 +33,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: PageView(
         controller: _pageController,
-        children: const [
-          HomeWidget(),
-          HomeFavoritesWidget(),
-          HomeSettingsWidget(),
+        children: [
+          baseLayout(widget: const HomeWidget()),
+          baseLayout(widget: const HomeFavoritesWidget()),
+          baseLayout(widget: const HomeSettingsWidget()),
         ],
         onPageChanged: (index) {
           // Use a better state management solution
