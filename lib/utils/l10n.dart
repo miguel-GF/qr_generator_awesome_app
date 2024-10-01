@@ -6,10 +6,14 @@ class L10n extends Translations {
         'en_US': {
           'tabFavorites': 'Favorites',
           'tabSettings': 'Settings',
+          'labelThemeLight': 'Light',
+          'labelThemeDark': 'Dark',
         },
         'es_MX': {
           'tabFavorites': 'Favoritos',
           'tabSettings': 'Configuraciones',
+          'labelThemeLight': 'Claro',
+          'labelThemeDark': 'Oscuro',
         }
       };
 }
