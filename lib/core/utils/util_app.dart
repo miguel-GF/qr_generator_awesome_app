@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '/constants.dart';
-import '/themes/app_theme.dart';
+import '../constants/app_strings.dart';
+import '../themes/app_theme.dart';
 
 class UtilApp {
   static bool isDarkMode() {

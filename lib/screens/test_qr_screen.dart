@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
-import '/app_assets.dart';
+import '/core/constants/app_assets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/utils/util_app.dart';
+import '/core/utils/util_app.dart';
 import '/widgets/home/switch_theme_widget.dart';
 
 class HomeSettingsWidget extends StatelessWidget {

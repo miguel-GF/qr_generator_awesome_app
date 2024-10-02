@@ -1,8 +1,8 @@
 import 'package:bottom_bar/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import '/utils/util_app.dart';
-import '/themes/colors_palette.dart';
+import '/core/utils/util_app.dart';
+import '/core/themes/colors_palette.dart';
 import '/screens/home/home_favorites_widget.dart';
 import '/screens/home/home_settings_widget.dart';
 import '/screens/home/home_widget.dart';
