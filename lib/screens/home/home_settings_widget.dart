@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/core/utils/util_app.dart';
+import '/core/utils/locale_util.dart';
 import '/widgets/home/switch_theme_widget.dart';
 
 class HomeSettingsWidget extends StatelessWidget {
@@ -19,7 +19,7 @@ class HomeSettingsWidget extends StatelessWidget {
           ],
         ),
         TextButton(
-          onPressed: () => UtilApp.changeLocale('en_US'),
+          onPressed: () => LocaleUtil.changeLocale('en_US'),
           child: const Text('cambiar idioma'),
         ),
       ],

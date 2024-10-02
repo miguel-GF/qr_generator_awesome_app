@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-import '/core/utils/util_app.dart';
+import '/core/utils/theme_util.dart';
 
 class SwitchThemeWidget extends StatefulWidget {
   const SwitchThemeWidget({super.key});
@@ -11,7 +11,7 @@ class SwitchThemeWidget extends StatefulWidget {
 }
 
 class _SwitchThemeWidgetState extends State<SwitchThemeWidget> {
-  bool value = UtilApp.isDarkMode();
+  bool value = ThemeUtil.isDarkMode();
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -22,13 +22,13 @@ class _SwitchThemeWidgetState extends State<SwitchThemeWidget> {
           value: value,
           thumbIcon:
               WidgetStateProperty.resolveWith<Icon?>((Set<WidgetState> states) {
-            if (UtilApp.isDarkMode()) {
+            if (ThemeUtil.isDarkMode()) {
               return const Icon(Icons.dark_mode_rounded);
             }
             return const Icon(Icons.light_mode_rounded);
           }),
           onChanged: (_) {
-            UtilApp.changeTheme();
+            ThemeUtil.changeTheme();
             setState(() {
               value = !value;
             });

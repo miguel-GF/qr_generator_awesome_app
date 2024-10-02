@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-
+import '/core/utils/locale_util.dart';
+import '/core/utils/theme_util.dart';
 import '/core/constants/app_assets.dart';
 import '/screens/home_screen.dart';
-import '/core/utils/util_app.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,8 +19,8 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
-    UtilApp.changeInitialTheme();
-    UtilApp.changeInitialLocale();
+    ThemeUtil.changeInitialTheme();
+    LocaleUtil.changeInitialLocale();
     _controller = AnimationController(vsync: this);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       _controller.addStatusListener((status) {
