@@ -21,6 +21,29 @@ final lightTheme = ThemeData(
       size: 24,
     ),
   ),
+  inputDecorationTheme: const InputDecorationTheme(
+    border: OutlineInputBorder(),
+    isDense: true,
+  ),
+  textButtonTheme: const TextButtonThemeData(
+    style: ButtonStyle(
+      alignment: Alignment.center,
+      elevation: WidgetStatePropertyAll(3.0),
+      backgroundColor:  WidgetStatePropertyAll(crPrimary),
+      foregroundColor: WidgetStatePropertyAll(Colors.white),
+      minimumSize: WidgetStatePropertyAll(Size(140, 40)),
+      maximumSize: WidgetStatePropertyAll(Size(double.infinity, 40)),
+      shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(6)),
+      )),
+      textStyle: WidgetStatePropertyAll(TextStyle(
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
+        fontSize: 18,
+        letterSpacing: 1.0
+      )),
+    ),
+  ),
 );
 
 final darkTheme = ThemeData(
@@ -41,6 +64,29 @@ final darkTheme = ThemeData(
     actionsIconTheme: IconThemeData(
       color: Colors.white,
       size: 24,
+    ),
+  ),
+  inputDecorationTheme: const InputDecorationTheme(
+    border: OutlineInputBorder(),
+    isDense: true,
+  ),
+  textButtonTheme: const TextButtonThemeData(
+    style: ButtonStyle(
+      alignment: Alignment.center,
+      elevation: WidgetStatePropertyAll(3.0),
+      backgroundColor:  WidgetStatePropertyAll(crPrimaryDark),
+      foregroundColor: WidgetStatePropertyAll(Colors.white),
+      minimumSize: WidgetStatePropertyAll(Size(140, 40)),
+      maximumSize: WidgetStatePropertyAll(Size(double.infinity, 40)),
+      shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(6)),
+      )),
+      textStyle: WidgetStatePropertyAll(TextStyle(
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
+        fontSize: 18,
+        letterSpacing: 1.0
+      )),
     ),
   ),
 );
