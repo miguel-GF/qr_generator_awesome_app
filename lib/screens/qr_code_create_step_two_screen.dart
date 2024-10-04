@@ -29,7 +29,7 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Control deslizante para el padding
+          const SizedBox(height: 20),
           Text('Padding: ${_padding.toStringAsFixed(0)}'),
           Slider(
             max: 50,
@@ -41,8 +41,6 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
             },
           ),
           const SizedBox(height: 20),
-
-          // Vista Previa del QR
           Container(
             color: Colors.grey[300],
             width: MediaQuery.of(context).size.width * 0.6, // 60% del ancho
@@ -65,61 +63,8 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
             ),
           ),
           const SizedBox(height: 20),
-
-          // Menú de Opciones (Lado izquierdo o derecho)
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  _buildOption(
-                    icon: Icons.format_color_fill,
-                    label: 'Color de Fondo',
-                    onTap: () => _showColorPicker(
-                      currentColor: _backgroundColor,
-                      onColorSelected: (color) {
-                        setState(() {
-                          _backgroundColor = color;
-                        });
-                      },
-                    ),
-                  ),
-                  _buildOption(
-                    icon: Icons.qr_code,
-                    label: 'Color del QR',
-                    onTap: () => _showColorPicker(
-                      currentColor: _qrColor,
-                      onColorSelected: (color) {
-                        setState(() {
-                          _qrColor = color;
-                        });
-                      },
-                    ),
-                  ),
-                  _buildOption(
-                    icon: Icons.remove_red_eye,
-                    label: 'Color de los Ojos',
-                    onTap: () => _showColorPicker(
-                      currentColor: _eyeColor,
-                      onColorSelected: (color) {
-                        setState(() {
-                          _eyeColor = color;
-                        });
-                      },
-                    ),
-                  ),
-                  _buildOption(
-                    icon: Icons.crop_square,
-                    label: 'Forma de los Ojos',
-                    onTap: () => _showEyeShapeSelector(),
-                  ),
-                  _buildOption(
-                    icon: Icons.crop_square,
-                    label: 'Forma de los Puntos',
-                    onTap: () => _showPointShapeSelector(),
-                  ),
-                ],
-              ),
-            ),
+            child: _buildOptionsGrid(),
           ),
         ],
       ),
@@ -135,16 +80,98 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
     );
   }
 
-  // Widget que genera el menú de opciones con scroll
+  // Widget que genera el menú de opciones con un GridView
+  Widget _buildOptionsGrid() {
+    return GridView.count(
+      crossAxisCount: 3, // Dos columnas
+      crossAxisSpacing: 20,
+      mainAxisSpacing: 8,
+      shrinkWrap: true,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      children: [
+        _buildOption(
+          icon: Icons.format_color_fill,
+          label: 'Color de Fondo',
+          onTap: () => _showColorPicker(
+            currentColor: _backgroundColor,
+            onColorSelected: (color) {
+              setState(() {
+                _backgroundColor = color;
+              });
+            },
+          ),
+        ),
+        _buildOption(
+          icon: Icons.qr_code,
+          label: 'Color del QR',
+          onTap: () => _showColorPicker(
+            currentColor: _qrColor,
+            onColorSelected: (color) {
+              setState(() {
+                _qrColor = color;
+              });
+            },
+          ),
+        ),
+        _buildOption(
+          icon: Icons.remove_red_eye,
+          label: 'Color de los Ojos',
+          onTap: () => _showColorPicker(
+            currentColor: _eyeColor,
+            onColorSelected: (color) {
+              setState(() {
+                _eyeColor = color;
+              });
+            },
+          ),
+        ),
+        _buildOption(
+          icon: Icons.crop_square,
+          label: 'Forma de los Ojos',
+          onTap: () => _showEyeShapeSelector(),
+        ),
+        _buildOption(
+          icon: Icons.crop_square,
+          label: 'Forma de los Puntos',
+          onTap: () => _showPointShapeSelector(),
+        ),
+      ],
+    );
+  }
+
+  // Widget para cada opción del menú
   Widget _buildOption({
     required IconData icon,
     required String label,
     required VoidCallback onTap,
   }) {
-    return ListTile(
-      leading: Icon(icon, size: 30),
-      title: Text(label),
-      onTap: onTap,
+    return Card(
+      margin: const EdgeInsets.all(8.0),
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(10),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, size: 40),
+              const SizedBox(height: 8),
+              Text(
+                label,
+                textAlign: TextAlign.center,
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qr_awesome_generator/features/qr_code/data/models/qr_code_model.dart';
 
@@ -7,7 +8,12 @@ import '../../../../helpers/json_reader.dart';
 
 void main() {
   const testQrCodeModel = QrCodeModel(
-    id: 'soyIdUno'
+    id: 'soyIdUno',
+    type: 'text',
+    data: 'data',
+    backgroundColor: Colors.transparent,
+    eyeColor: Colors.black,
+    pointColor: Colors.black,
   );
   test('should be a subclass of qr code entity', () async {
     //assert
@@ -15,9 +21,8 @@ void main() {
   });
   test('should return a valid qr code model from json', () async {
     //arrange
-    final Map<String, dynamic> jsonMap = json.decode(
-      readJson('helpers/dummy_data/dummy_qr_code_response.json')
-    );
+    final Map<String, dynamic> jsonMap =
+        json.decode(readJson('helpers/dummy_data/dummy_qr_code_response.json'));
     //act
     final result = QrCodeModel.fromJson(jsonMap);
     //assert
@@ -27,9 +32,7 @@ void main() {
     //act
     final result = testQrCodeModel.toJson();
     //assert
-    final expectedJson = {
-      'id': 'soyIdUno'
-    };
+    final expectedJson = {'id': 'soyIdUno', 'type': 'text', 'data': 'data'};
     expect(result, expectedJson);
   });
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:qr_awesome_generator/screens/qr_code_create_step_two_screen.dart';
+// import 'qr_code_create_step_one_screen.dart';
 import '/core/utils/locale_util.dart';
 import '/core/utils/theme_util.dart';
 import '/core/constants/app_assets.dart';
-import '/screens/home_screen.dart';
+// import '/screens/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -25,7 +27,8 @@ class _SplashScreenState extends State<SplashScreen>
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       _controller.addStatusListener((status) {
         if (status == AnimationStatus.completed) {
-          Get.offAll(() => const HomeScreen());
+          // Get.offAll(() => const HomeScreen());
+          Get.offAll(() => const QrCodeCreateStepTwoScreen());
         }
       });
     });
