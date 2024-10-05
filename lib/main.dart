@@ -6,6 +6,7 @@ import 'screens/error_screen.dart';
 import 'screens/splash_screen.dart';
 import 'core/themes/app_theme.dart';
 import 'core/utils/l10n.dart';
+import 'core/routes/routes_pages.dart';
 
 // ignore: avoid_void_async
 void main() async {
@@ -35,15 +36,14 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
       builder: (BuildContext context, Widget? widget) {
         ErrorWidget.builder = (FlutterErrorDetails errorDetails) =>
             ErrorScreen(errorDetails: errorDetails);
         return widget!;
       },
       translations: L10n(),
-      // getPages: pages,
-      // routingCallback: (routing) => PagesRoutes.fnRoutingCallback(routing!),
+      home: const SplashScreen(),
+      getPages: getPages,
     );
   }
 }
