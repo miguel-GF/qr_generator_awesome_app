@@ -3,9 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:qr_awesome_generator/features/qr_code/presentation/widgets/input_add_new_data.dart';
-
-import '../features/qr_code/data/models/qr_code_model.dart'; // Librería para íconos sociales
+import '/core/routes/routes_names.dart';
+import '/core/utils/string_util.dart';
+import '/features/qr_code/presentation/widgets/input_add_new_data.dart';
+import '/features/qr_code/data/models/qr_code_model.dart';
 
 class QrCodeCreateStepOneScreen extends StatefulWidget {
   const QrCodeCreateStepOneScreen({super.key});
@@ -23,15 +24,21 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
   final TextEditingController _textGlobalCtr = TextEditingController();
   final TextEditingController _telefonoCtr = TextEditingController();
   final TextEditingController _whatsappCtr = TextEditingController();
-  final TextEditingController _descripcionCtr = TextEditingController();
+  final TextEditingController _commentCtr = TextEditingController();
 
   @override
   void dispose() {
     _textGlobalCtr.dispose();
     _telefonoCtr.dispose();
     _whatsappCtr.dispose();
-    _descripcionCtr.dispose();
+    _commentCtr.dispose();
     super.dispose();
+  }
+
+  Future<void> _irPaginaDos(QrCodeModel qrCode) async {
+    Get.toNamed(nameCreateQrCodeStepTwoScreen, arguments: <String, dynamic>{
+      'qrCodeStepOne': qrCode.toJson(),
+    });
   }
 
   @override
@@ -101,7 +108,7 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 4.0),
           child: TextButton(
-            onPressed: () {
+            onPressed: () async {
               // Usar la GlobalKey para validar el formulario
               if (_formKey.currentState!.validate()) {
                 // Si es válido, ejecutar alguna acción (ej. enviar datos)
@@ -124,16 +131,73 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
                     qrData = 'https://wa.me/${_whatsappCtr.text}?text=Hola';
                     break;
                 }
-                final QrCodeModel qrCodeModel = QrCodeModel(
-                  id: 'tes1',
-                  data: qrData,
-                  type: _selectedType,
-                  description: _descripcionCtr.text,
-                  backgroundColor: Colors.transparent,
-                  eyeColor: Colors.black,
-                  pointColor: Colors.black,
-                );
-                print(qrCodeModel);
+                late final QrCodeModel qrCodeModel;
+                switch (_selectedType) {
+                  case 'texto':
+                    qrCodeModel = QrCodeModel(
+                      id: StringUtil.nanoId(),
+                      data: qrData,
+                      type: _selectedType,
+                      comment: _commentCtr.text,
+                      backgroundColor: Colors.transparent,
+                      eyeColor: Colors.black,
+                      pointColor: Colors.black,
+                      text: _textGlobalCtr.text,
+                    );
+                    break;
+                  case 'link':
+                    qrCodeModel = QrCodeModel(
+                      id: StringUtil.nanoId(),
+                      data: qrData,
+                      type: _selectedType,
+                      comment: _commentCtr.text,
+                      backgroundColor: Colors.transparent,
+                      eyeColor: Colors.black,
+                      pointColor: Colors.black,
+                      url: _textGlobalCtr.text,
+                    );
+                    break;
+                  case 'facebook':
+                    qrCodeModel = QrCodeModel(
+                      id: StringUtil.nanoId(),
+                      data: qrData,
+                      type: _selectedType,
+                      comment: _commentCtr.text,
+                      backgroundColor: Colors.transparent,
+                      eyeColor: Colors.black,
+                      pointColor: Colors.black,
+                      url: _textGlobalCtr.text,
+                    );
+                    break;
+                  case 'contacto':
+                    qrCodeModel = QrCodeModel(
+                      id: StringUtil.nanoId(),
+                      data: qrData,
+                      type: _selectedType,
+                      comment: _commentCtr.text,
+                      backgroundColor: Colors.transparent,
+                      eyeColor: Colors.black,
+                      pointColor: Colors.black,
+                      lastName: _textGlobalCtr.text,
+                      phone: _telefonoCtr.text,
+                    );
+                    break;
+                  case 'whatsapp':
+                    qrCodeModel = QrCodeModel(
+                      id: StringUtil.nanoId(),
+                      data: qrData,
+                      type: _selectedType,
+                      comment: _commentCtr.text,
+                      backgroundColor: Colors.transparent,
+                      eyeColor: Colors.black,
+                      pointColor: Colors.black,
+                      lastName: _textGlobalCtr.text,
+                      phone: _whatsappCtr.text,
+                      message: 'Hola',
+                    );
+                    break;
+                }
+                await _irPaginaDos(qrCodeModel);
               } else {
                 // Si no es válido, mostrar un mensaje
                 Get.snackbar(
@@ -278,7 +342,7 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
         break;
     }
     fields.add(InputAddNewData(
-      controller: _descripcionCtr,
+      controller: _commentCtr,
       maxLines: 3,
       maxLength: 250,
       labelText: 'Descripción del Código',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:get/get.dart';
 import '../features/qr_code/presentation/widgets/qr_code_widget.dart';
 import '../features/qr_code/data/models/qr_code_model.dart';
 
@@ -19,6 +20,15 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
   String _eyeShape = 'square'; // Valores: 'round' o 'square'
   String _pointShape = 'square'; // Valores: 'round' o 'square'
   double _padding = 16.0;
+  late final QrCodeModel qrCodeStepOne;
+
+  @override
+  void initState() {
+    super.initState();
+    final Map<String, dynamic> arguments =
+        Get.arguments as Map<String, dynamic>;
+    qrCodeStepOne = QrCodeModel.fromJson(arguments['qrCodeStepOne']);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +55,13 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
             color: Colors.grey[300],
             width: MediaQuery.of(context).size.width * 0.6, // 60% del ancho
             padding: const EdgeInsets.all(16.0),
-            child: Center( // Centrar el QR en su contenedor
+            child: Center(
+              // Centrar el QR en su contenedor
               child: QrCodeWidget(
                 qrCodeModel: QrCodeModel(
-                  id: 'QR123',
-                  type: 'texto', // Solo para mantener la estructura
-                  data: 'https://ejemplo.com', // Un QR genérico por ahora
+                  id: qrCodeStepOne.id,
+                  type: qrCodeStepOne.type,
+                  data: qrCodeStepOne.data,
                   size: 200, // Ajuste fijo del tamaño
                   padding: _padding,
                   backgroundColor: _backgroundColor,
