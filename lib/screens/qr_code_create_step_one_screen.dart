@@ -25,6 +25,14 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
   final TextEditingController _telefonoCtr = TextEditingController();
   final TextEditingController _whatsappCtr = TextEditingController();
   final TextEditingController _commentCtr = TextEditingController();
+  final TextEditingController _enterpriseCtr = TextEditingController();
+  final TextEditingController _emailCtr = TextEditingController();
+  final TextEditingController _addressCtr = TextEditingController();
+  final TextEditingController _cityCtr = TextEditingController();
+  final TextEditingController _countryCtr = TextEditingController();
+  final TextEditingController _noteCtr = TextEditingController();
+  final TextEditingController _urlCtr = TextEditingController();
+  final TextEditingController _descriptionCtr = TextEditingController();
 
   @override
   void dispose() {
@@ -32,6 +40,14 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
     _telefonoCtr.dispose();
     _whatsappCtr.dispose();
     _commentCtr.dispose();
+    _enterpriseCtr.dispose();
+    _emailCtr.dispose();
+    _addressCtr.dispose();
+    _cityCtr.dispose();
+    _countryCtr.dispose();
+    _noteCtr.dispose();
+    _urlCtr.dispose();
+    _descriptionCtr.dispose();
     super.dispose();
   }
 
@@ -121,10 +137,16 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
                     qrData = _textGlobalCtr.text;
                     break;
                   case 'contacto':
-                    qrData = 'BEGIN:VCARD\n'
-                        'VERSION:3.0\n'
-                        'FN:${_textGlobalCtr.text}\n'
-                        'TEL:${_telefonoCtr.text}\n'
+                    'BEGIN:VCARD\n'
+                        'VERSION:3.0\n' // Version de vCard
+                        'FN:${_textGlobalCtr.text}\n' // Nombre completo
+                        'ORG:${_enterpriseCtr.text}\n' // Empresa (Opcional)
+                        'TITLE:${_noteCtr.text}\n' // Cargo (Opcional, puedes usar description o note)
+                        'TEL:${_telefonoCtr.text}\n' // Teléfono principal
+                        'EMAIL:${_emailCtr.text}\n' // Correo electrónico
+                        'ADR;TYPE=HOME:${_addressCtr.text};${_cityCtr.text};${_countryCtr.text};\n' // Dirección
+                        'URL:${_urlCtr.text}\n' // Sitio web (Opcional)
+                        'NOTE:${_descriptionCtr.text}\n' // Nota o descripción del contacto (Opcional)
                         'END:VCARD';
                     break;
                   case 'whatsapp':
@@ -139,9 +161,10 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
                       data: qrData,
                       type: _selectedType,
                       comment: _commentCtr.text,
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: Colors.white,
                       eyeColor: Colors.black,
                       pointColor: Colors.black,
+                      qrBackgroundColor: Colors.transparent,
                       text: _textGlobalCtr.text,
                     );
                     break;
@@ -151,9 +174,10 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
                       data: qrData,
                       type: _selectedType,
                       comment: _commentCtr.text,
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: Colors.white,
                       eyeColor: Colors.black,
                       pointColor: Colors.black,
+                      qrBackgroundColor: Colors.transparent,
                       url: _textGlobalCtr.text,
                     );
                     break;
@@ -163,9 +187,10 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
                       data: qrData,
                       type: _selectedType,
                       comment: _commentCtr.text,
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: Colors.white,
                       eyeColor: Colors.black,
                       pointColor: Colors.black,
+                      qrBackgroundColor: Colors.transparent,
                       url: _textGlobalCtr.text,
                     );
                     break;
@@ -175,11 +200,19 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
                       data: qrData,
                       type: _selectedType,
                       comment: _commentCtr.text,
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: Colors.white,
                       eyeColor: Colors.black,
                       pointColor: Colors.black,
-                      lastName: _textGlobalCtr.text,
+                      qrBackgroundColor: Colors.transparent,
+                      name: _textGlobalCtr.text,
                       phone: _telefonoCtr.text,
+                      email: _emailCtr.text,
+                      url: _urlCtr.text,
+                      note: _noteCtr.text,
+                      address: _addressCtr.text,
+                      city: _cityCtr.text,
+                      country: _countryCtr.text,
+                      description: _descriptionCtr.text,
                     );
                     break;
                   case 'whatsapp':
@@ -188,10 +221,11 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
                       data: qrData,
                       type: _selectedType,
                       comment: _commentCtr.text,
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: Colors.white,
                       eyeColor: Colors.black,
                       pointColor: Colors.black,
-                      lastName: _textGlobalCtr.text,
+                      qrBackgroundColor: Colors.transparent,
+                      name: _textGlobalCtr.text,
                       phone: _whatsappCtr.text,
                       message: 'Hola',
                     );
@@ -309,6 +343,36 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
               }
               return null;
             },
+          ),
+          InputAddNewData(
+            controller: _noteCtr,
+            labelText: 'Cargo',
+            maxLength: 15,
+            hintText: 'Ingrese el cargo/puesto del contacto',
+          ),
+          InputAddNewData(
+            controller: _emailCtr,
+            labelText: 'Email',
+            maxLength: 15,
+            hintText: 'Ingrese el email del contacto',
+          ),
+          InputAddNewData(
+            controller: _urlCtr,
+            labelText: 'Página web',
+            maxLength: 15,
+            hintText: 'Ingrese el url de la página del contacto',
+          ),
+          InputAddNewData(
+            controller: _addressCtr,
+            labelText: 'Dirección',
+            maxLength: 15,
+            hintText: 'Ingrese la dirección del contacto',
+          ),
+          InputAddNewData(
+            controller: _descriptionCtr,
+            labelText: 'Descripción',
+            maxLength: 15,
+            hintText: 'Ingrese una descripción del contacto',
           ),
         ]);
         break;
