@@ -17,6 +17,7 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
   Color _backgroundColor = Colors.white;
   Color _qrColor = Colors.black;
   Color _eyeColor = Colors.black;
+  Color _qrBackgroundColor = Colors.transparent;
   String _eyeShape = 'square'; // Valores: 'round' o 'square'
   String _pointShape = 'square'; // Valores: 'round' o 'square'
   double _padding = 16.0;
@@ -51,10 +52,8 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
             },
           ),
           const SizedBox(height: 20),
-          Container(
-            color: Colors.grey[300],
-            width: MediaQuery.of(context).size.width * 0.6, // 60% del ancho
-            padding: const EdgeInsets.all(16.0),
+          SizedBox(
+            width: Get.width * 0.5,
             child: Center(
               // Centrar el QR en su contenedor
               child: QrCodeWidget(
@@ -69,6 +68,7 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
                   eyeColor: _eyeColor,
                   eyeType: _eyeShape, // Forma de los ojos
                   pointType: _pointShape,
+                  qrBackgroundColor: _qrBackgroundColor,
                 ),
               ),
             ),
@@ -94,7 +94,7 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
   // Widget que genera el menú de opciones con un GridView
   Widget _buildOptionsGrid() {
     return GridView.count(
-      crossAxisCount: 3, // Dos columnas
+      crossAxisCount: 2, // Dos columnas
       crossAxisSpacing: 20,
       mainAxisSpacing: 8,
       shrinkWrap: true,
@@ -102,12 +102,24 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
       children: [
         _buildOption(
           icon: Icons.format_color_fill,
-          label: 'Color de Fondo',
+          label: 'Color de fondo',
           onTap: () => _showColorPicker(
             currentColor: _backgroundColor,
             onColorSelected: (color) {
               setState(() {
                 _backgroundColor = color;
+              });
+            },
+          ),
+        ),
+        _buildOption(
+          icon: Icons.format_color_fill,
+          label: 'Color de fondo QR',
+          onTap: () => _showColorPicker(
+            currentColor: _qrBackgroundColor,
+            onColorSelected: (color) {
+              setState(() {
+                _qrBackgroundColor = color;
               });
             },
           ),
@@ -197,9 +209,27 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
         return AlertDialog(
           title: const Text('Selecciona un color'),
           content: SingleChildScrollView(
-            child: ColorPicker(
+            child: BlockPicker(
               pickerColor: currentColor,
               onColorChanged: onColorSelected,
+              availableColors: const [
+                Colors.transparent,
+                Colors.red,
+                Colors.purple,
+                Colors.orange,
+                Colors.blue,
+                Colors.green,
+                Colors.yellow,
+                Colors.pink,
+                Colors.teal,
+                Colors.cyan,
+                Colors.amber,
+                Colors.lime,
+                Colors.brown,
+                Colors.grey,
+                Colors.black,
+                Colors.white,
+              ],
             ),
           ),
           actions: [
