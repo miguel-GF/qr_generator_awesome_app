@@ -113,9 +113,10 @@ class _QrCodeCreateScreenState extends State<QrCodeCreateScreen> {
                         data: _data,
                         size: 100 * _sizeFactor, // Tamaño del QR
                         padding: _padding,
-                        backgroundColor: Colors.transparent,
+                        backgroundColor: Colors.white,
                         eyeColor: Colors.black,
                         pointColor: Colors.black,
+                        qrBackgroundColor: Colors.transparent,
                       ),
                     ),
                   ),

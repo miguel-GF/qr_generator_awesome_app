@@ -17,20 +17,20 @@ class QrCodeEntity extends Equatable {
   final Color backgroundColor;
   final Color eyeColor;
   final Color pointColor;
+  final Color qrBackgroundColor;
 
   // Propiedades comunes compartidas
   final String? phone; // Usado para WhatsApp, SMS, Teléfono
   final String? message; // Usado para WhatsApp, SMS, Email (mensaje en cuerpo del correo)
   final String? url; // Usado para Link, Twitter, YouTube, App Store/Play Store, etc.
   final String? description; // Usado para descripción general (Link, Evento, etc.)
+  final String? email; // Usado para contacto (email del contacto) y correo electrónico (destinatario)
 
   // Texto simple
   final String? text; // Solo para el QR de texto
 
   // Contacto (vCard o MECARD)
-  final String? firstName; // Nombre del contacto
-  final String? lastName; // Apellido del contacto
-  final String? email; // Usado para contacto (email del contacto) y correo electrónico (destinatario)
+  final String? name; // Nombre del contacto
   final String? address; // Dirección del contacto
   final String? city; // Ciudad del contacto
   final String? country; // País del contacto
@@ -68,16 +68,16 @@ class QrCodeEntity extends Equatable {
     this.gapless = true,
     this.eyeType = 'square',
     this.pointType = 'square',
-    this.backgroundColor = Colors.transparent,
+    this.backgroundColor = Colors.white,
     this.eyeColor = Colors.black,
     this.pointColor = Colors.black,
+    this.qrBackgroundColor = Colors.transparent,
     this.phone,
     this.message,
     this.url,
     this.description,
     this.text,
-    this.firstName,
-    this.lastName,
+    this.name,
     this.email,
     this.address,
     this.city,
@@ -111,13 +111,13 @@ class QrCodeEntity extends Equatable {
       backgroundColor,
       eyeColor,
       pointColor,
+      qrBackgroundColor,
       phone!,
       message!,
       url!,
       description!,
       text!,
-      firstName!,
-      lastName!,
+      name!,
       email!,
       address!,
       city!,

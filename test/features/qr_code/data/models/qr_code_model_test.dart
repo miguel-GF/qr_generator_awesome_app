@@ -11,9 +11,10 @@ void main() {
     id: 'soyIdUno',
     type: 'text',
     data: 'data',
-    backgroundColor: Colors.transparent,
+    backgroundColor: Colors.white,
     eyeColor: Colors.black,
     pointColor: Colors.black,
+    qrBackgroundColor: Colors.transparent,
   );
   test('should be a subclass of qr code entity', () async {
     //assert

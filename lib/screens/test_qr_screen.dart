@@ -16,6 +16,7 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
   Color _backgroundColor = Colors.white;
   Color _qrColor = Colors.black;
   Color _eyeColor = Colors.black;
+  Color _qrBackgroundColor = Colors.transparent;
   String _eyeShape = 'square'; // Valores: 'round' o 'square'
   String _pointShape = 'square'; // Valores: 'round' o 'square'
   double _padding = 16.0;
@@ -60,6 +61,7 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
                   eyeColor: _eyeColor,
                   eyeType: _eyeShape, // Forma de los ojos
                   pointType: _pointShape,
+                  qrBackgroundColor: _qrBackgroundColor,
                 ),
               ),
             ),
@@ -103,6 +105,18 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
                       onColorSelected: (color) {
                         setState(() {
                           _eyeColor = color;
+                        });
+                      },
+                    ),
+                  ),
+                  _buildOption(
+                    icon: Icons.remove_red_eye,
+                    label: 'Color de Fondo',
+                    onTap: () => _showColorPicker(
+                      currentColor: _qrBackgroundColor,
+                      onColorSelected: (color) {
+                        setState(() {
+                          _qrBackgroundColor = color;
                         });
                       },
                     ),

@@ -21,6 +21,10 @@ class QrCodeModel extends QrCodeEntity {
   @ColorConverter()
   final Color pointColor;
 
+  @override
+  @ColorConverter()
+  final Color qrBackgroundColor;
+
   const QrCodeModel({
     required super.id,
     required super.type,
@@ -36,8 +40,7 @@ class QrCodeModel extends QrCodeEntity {
     super.url,
     super.description,
     super.text,
-    super.firstName,
-    super.lastName,
+    super.name,
     super.email,
     super.address,
     super.city,
@@ -57,10 +60,12 @@ class QrCodeModel extends QrCodeEntity {
     required this.backgroundColor,
     required this.eyeColor,
     required this.pointColor,
+    required this.qrBackgroundColor,
   }) : super(
           backgroundColor: backgroundColor,
           eyeColor: eyeColor,
           pointColor: pointColor,
+          qrBackgroundColor: qrBackgroundColor,
         );
 
   factory QrCodeModel.fromJson(Map<String, dynamic> data) =>

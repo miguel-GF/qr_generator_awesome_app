@@ -21,8 +21,7 @@ QrCodeModel _$QrCodeModelFromJson(Map<String, dynamic> json) => QrCodeModel(
       url: json['url'] as String?,
       description: json['description'] as String?,
       text: json['text'] as String?,
-      firstName: json['firstName'] as String?,
-      lastName: json['lastName'] as String?,
+      name: json['name'] as String?,
       email: json['email'] as String?,
       address: json['address'] as String?,
       city: json['city'] as String?,
@@ -48,6 +47,8 @@ QrCodeModel _$QrCodeModelFromJson(Map<String, dynamic> json) => QrCodeModel(
       eyeColor: const ColorConverter().fromJson(json['eyeColor'] as String?),
       pointColor:
           const ColorConverter().fromJson(json['pointColor'] as String?),
+      qrBackgroundColor:
+          const ColorConverter().fromJson(json['qrBackgroundColor'] as String?),
     );
 
 Map<String, dynamic> _$QrCodeModelToJson(QrCodeModel instance) =>
@@ -65,10 +66,9 @@ Map<String, dynamic> _$QrCodeModelToJson(QrCodeModel instance) =>
       'message': instance.message,
       'url': instance.url,
       'description': instance.description,
-      'text': instance.text,
-      'firstName': instance.firstName,
-      'lastName': instance.lastName,
       'email': instance.email,
+      'text': instance.text,
+      'name': instance.name,
       'address': instance.address,
       'city': instance.city,
       'country': instance.country,
@@ -88,4 +88,6 @@ Map<String, dynamic> _$QrCodeModelToJson(QrCodeModel instance) =>
           const ColorConverter().toJson(instance.backgroundColor),
       'eyeColor': const ColorConverter().toJson(instance.eyeColor),
       'pointColor': const ColorConverter().toJson(instance.pointColor),
+      'qrBackgroundColor':
+          const ColorConverter().toJson(instance.qrBackgroundColor),
     };

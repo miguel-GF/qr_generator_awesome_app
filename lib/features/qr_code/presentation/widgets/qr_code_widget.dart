@@ -16,9 +16,8 @@ class QrCodeWidget extends StatelessWidget {
       key: Key(qrCodeModel.id),
       data: qrCodeModel.data,
       gapless: qrCodeModel.gapless,
-      backgroundColor: qrCodeModel.backgroundColor,
+      backgroundColor: qrCodeModel.qrBackgroundColor,
       padding: EdgeInsets.all(qrCodeModel.padding),
-      size: qrCodeModel.size,
       eyeStyle: QrEyeStyle(
         color: qrCodeModel.eyeColor,
         eyeShape: qrCodeModel.eyeType == 'square'
@@ -31,6 +30,19 @@ class QrCodeWidget extends StatelessWidget {
             : QrDataModuleShape.circle,
         color: qrCodeModel.pointColor,
       ),
+      errorStateBuilder: (context, error) {
+        // Aquí defines lo que se mostrará en caso de error
+        return Center(
+          child: Container(
+            color: Colors.red,
+            child: Text(
+              'Error al generar el QR: ${error.toString()}',
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        );
+      },
     );
   }
 }
