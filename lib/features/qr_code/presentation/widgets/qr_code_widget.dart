@@ -12,37 +12,41 @@ class QrCodeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return QrImageView(
-      key: Key(qrCodeModel.id),
-      data: qrCodeModel.data,
-      gapless: qrCodeModel.gapless,
-      backgroundColor: qrCodeModel.qrBackgroundColor,
-      padding: EdgeInsets.all(qrCodeModel.padding),
-      eyeStyle: QrEyeStyle(
-        color: qrCodeModel.eyeColor,
-        eyeShape: qrCodeModel.eyeType == 'square'
-            ? QrEyeShape.square
-            : QrEyeShape.circle,
-      ),
-      dataModuleStyle: QrDataModuleStyle(
-        dataModuleShape: qrCodeModel.pointType == 'square'
-            ? QrDataModuleShape.square
-            : QrDataModuleShape.circle,
-        color: qrCodeModel.pointColor,
-      ),
-      errorStateBuilder: (context, error) {
-        // Aquí defines lo que se mostrará en caso de error
-        return Center(
-          child: Container(
-            color: Colors.red,
-            child: Text(
-              'Error al generar el QR: ${error.toString()}',
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white),
+    return Container(
+      color: qrCodeModel.backgroundColor,
+      padding: const EdgeInsets.all(16.0),
+      child: QrImageView(
+        key: Key(qrCodeModel.id),
+        data: qrCodeModel.data,
+        gapless: qrCodeModel.gapless,
+        backgroundColor: qrCodeModel.qrBackgroundColor,
+        padding: EdgeInsets.all(qrCodeModel.padding),
+        eyeStyle: QrEyeStyle(
+          color: qrCodeModel.eyeColor,
+          eyeShape: qrCodeModel.eyeType == 'square'
+              ? QrEyeShape.square
+              : QrEyeShape.circle,
+        ),
+        dataModuleStyle: QrDataModuleStyle(
+          dataModuleShape: qrCodeModel.pointType == 'square'
+              ? QrDataModuleShape.square
+              : QrDataModuleShape.circle,
+          color: qrCodeModel.pointColor,
+        ),
+        errorStateBuilder: (context, error) {
+          // Aquí defines lo que se mostrará en caso de error
+          return Center(
+            child: Container(
+              color: Colors.red,
+              child: Text(
+                'Error al generar el QR: ${error.toString()}',
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Colors.white),
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
