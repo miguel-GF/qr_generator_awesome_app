@@ -2,12 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'bool_int_converter.dart';
 import '../../domain/entities/qr_code_entity.dart';
 import 'color_converter.dart';
 
 part 'qr_code_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class QrCodeModel extends QrCodeEntity {
   @override
   @ColorConverter()
@@ -24,6 +25,14 @@ class QrCodeModel extends QrCodeEntity {
   @override
   @ColorConverter()
   final Color qrBackgroundColor;
+
+  @override
+  @BoolIntConverter()
+  final bool gapless = true;
+
+  @override
+  @BoolIntConverter()
+  final bool hidden = false;
 
   const QrCodeModel({
     required super.id,
