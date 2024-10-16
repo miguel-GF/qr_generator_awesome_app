@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '/core/widgets/bottom_bar_widget.dart';
 import '/core/routes/routes_names.dart';
 import '/core/utils/string_util.dart';
 import '/features/qr_code/presentation/widgets/input_add_new_data.dart';
@@ -57,193 +58,193 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
     });
   }
 
+  void validateData() async {
+    try {
+      if (_formKey.currentState!.validate()) {
+        // Si es válido, ejecutar alguna acción (ej. enviar datos)
+        String qrData = '';
+
+        switch (_selectedType) {
+          case 'texto':
+          case 'link':
+          case 'facebook':
+            qrData = _textGlobalCtr.text;
+            break;
+          case 'contacto':
+            'BEGIN:VCARD\n'
+                'VERSION:3.0\n' // Version de vCard
+                'FN:${_textGlobalCtr.text}\n' // Nombre completo
+                'ORG:${_enterpriseCtr.text}\n' // Empresa (Opcional)
+                'TITLE:${_noteCtr.text}\n' // Cargo (Opcional, puedes usar description o note)
+                'TEL:${_telefonoCtr.text}\n' // Teléfono principal
+                'EMAIL:${_emailCtr.text}\n' // Correo electrónico
+                'ADR;TYPE=HOME:${_addressCtr.text};${_cityCtr.text};${_countryCtr.text};\n' // Dirección
+                'URL:${_urlCtr.text}\n' // Sitio web (Opcional)
+                'NOTE:${_descriptionCtr.text}\n' // Nota o descripción del contacto (Opcional)
+                'END:VCARD';
+            break;
+          case 'whatsapp':
+            qrData = 'https://wa.me/${_whatsappCtr.text}?text=Hola';
+            break;
+        }
+        late final QrCodeModel qrCodeModel;
+        switch (_selectedType) {
+          case 'texto':
+            qrCodeModel = QrCodeModel(
+              id: StringUtil.nanoId(),
+              data: qrData,
+              type: _selectedType,
+              comment: _commentCtr.text,
+              backgroundColor: Colors.white,
+              eyeColor: Colors.black,
+              pointColor: Colors.black,
+              qrBackgroundColor: Colors.transparent,
+              text: _textGlobalCtr.text,
+            );
+            break;
+          case 'link':
+            qrCodeModel = QrCodeModel(
+              id: StringUtil.nanoId(),
+              data: qrData,
+              type: _selectedType,
+              comment: _commentCtr.text,
+              backgroundColor: Colors.white,
+              eyeColor: Colors.black,
+              pointColor: Colors.black,
+              qrBackgroundColor: Colors.transparent,
+              url: _textGlobalCtr.text,
+            );
+            break;
+          case 'facebook':
+            qrCodeModel = QrCodeModel(
+              id: StringUtil.nanoId(),
+              data: qrData,
+              type: _selectedType,
+              comment: _commentCtr.text,
+              backgroundColor: Colors.white,
+              eyeColor: Colors.black,
+              pointColor: Colors.black,
+              qrBackgroundColor: Colors.transparent,
+              url: _textGlobalCtr.text,
+            );
+            break;
+          case 'contacto':
+            qrCodeModel = QrCodeModel(
+              id: StringUtil.nanoId(),
+              data: qrData,
+              type: _selectedType,
+              comment: _commentCtr.text,
+              backgroundColor: Colors.white,
+              eyeColor: Colors.black,
+              pointColor: Colors.black,
+              qrBackgroundColor: Colors.transparent,
+              name: _textGlobalCtr.text,
+              phone: _telefonoCtr.text,
+              email: _emailCtr.text,
+              url: _urlCtr.text,
+              note: _noteCtr.text,
+              address: _addressCtr.text,
+              city: _cityCtr.text,
+              country: _countryCtr.text,
+              description: _descriptionCtr.text,
+            );
+            break;
+          case 'whatsapp':
+            qrCodeModel = QrCodeModel(
+              id: StringUtil.nanoId(),
+              data: qrData,
+              type: _selectedType,
+              comment: _commentCtr.text,
+              backgroundColor: Colors.white,
+              eyeColor: Colors.black,
+              pointColor: Colors.black,
+              qrBackgroundColor: Colors.transparent,
+              name: _textGlobalCtr.text,
+              phone: _whatsappCtr.text,
+              message: 'Hola',
+            );
+            break;
+        }
+        await _irPaginaDos(qrCodeModel);
+      } else {
+        // Si no es válido, mostrar un mensaje
+        Get.snackbar('Datos incompletos o incorrectos', 'Formulario no válido',
+            snackPosition: SnackPosition.BOTTOM);
+      }
+    } catch (e) {
+      // print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Selecciona el tipo de código'),
-      ),
-      body: Column(
-        children: [
-          const SizedBox(height: 16),
-          const Text(
-            'Seleccione el tipo de código que desea generar:',
-            style: TextStyle(fontSize: 16),
-          ),
-          const SizedBox(height: 16),
-          // Slider de tipos de código QR (Horizontal)
-          SizedBox(
-            height: Get.height * 0.2, // Altura proporcional
-            child: GridView(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3, // Número de columnas
-                mainAxisSpacing: 20.0, // Espacio vertical entre los elementos
-                crossAxisSpacing:
-                    30.0, // Espacio horizontal entre los elementos
-              ),
-              padding: const EdgeInsets.all(20),
-              shrinkWrap: true,
-              children: [
-                _buildCodeTypeButton('texto', FontAwesomeIcons.textWidth),
-                _buildCodeTypeButton('link', FontAwesomeIcons.link),
-                _buildCodeTypeButton('contacto', FontAwesomeIcons.addressBook),
-                _buildCodeTypeButton('whatsapp', FontAwesomeIcons.whatsapp),
-                _buildCodeTypeButton('facebook', FontAwesomeIcons.facebook),
-              ],
-              // child: ListView(
-              //   scrollDirection: Axis.horizontal,
-              //   physics: const AlwaysScrollableScrollPhysics(),
-              //   shrinkWrap: true,
-              //   children: [
-              //     _buildCodeTypeButton('texto', FontAwesomeIcons.textWidth),
-              //     _buildCodeTypeButton('link', FontAwesomeIcons.link),
-              //     _buildCodeTypeButton('contacto', FontAwesomeIcons.addressBook),
-              //     _buildCodeTypeButton('whatsapp', FontAwesomeIcons.whatsapp),
-              //     _buildCodeTypeButton('facebook', FontAwesomeIcons.facebook),
-              //   ],
-              // ),
+        appBar: AppBar(
+          title: const Text('1. Configuración de QR'),
+        ),
+        body: Column(
+          children: [
+            const SizedBox(height: 16),
+            const Text(
+              'Seleccione el tipo de código que desea generar',
+              style: TextStyle(fontSize: 16),
             ),
-          ),
-          const SizedBox(height: 20),
-          // Inputs con Scroll en caso de ser necesario
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: _buildInputFields(),
+            const SizedBox(height: 16),
+            // Slider de tipos de código QR (Horizontal)
+            SizedBox(
+              height: Get.height * 0.2, // Altura proporcional
+              child: GridView(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3, // Número de columnas
+                  mainAxisSpacing: 20.0, // Espacio vertical entre los elementos
+                  crossAxisSpacing:
+                      30.0, // Espacio horizontal entre los elementos
+                ),
+                padding: const EdgeInsets.all(20),
+                shrinkWrap: true,
+                children: [
+                  _buildCodeTypeButton('texto', FontAwesomeIcons.textWidth),
+                  _buildCodeTypeButton('link', FontAwesomeIcons.link),
+                  _buildCodeTypeButton(
+                      'contacto', FontAwesomeIcons.addressBook),
+                  _buildCodeTypeButton('whatsapp', FontAwesomeIcons.whatsapp),
+                  _buildCodeTypeButton('facebook', FontAwesomeIcons.facebook),
+                ],
+                // child: ListView(
+                //   scrollDirection: Axis.horizontal,
+                //   physics: const AlwaysScrollableScrollPhysics(),
+                //   shrinkWrap: true,
+                //   children: [
+                //     _buildCodeTypeButton('texto', FontAwesomeIcons.textWidth),
+                //     _buildCodeTypeButton('link', FontAwesomeIcons.link),
+                //     _buildCodeTypeButton('contacto', FontAwesomeIcons.addressBook),
+                //     _buildCodeTypeButton('whatsapp', FontAwesomeIcons.whatsapp),
+                //     _buildCodeTypeButton('facebook', FontAwesomeIcons.facebook),
+                //   ],
+                // ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            // Inputs con Scroll en caso de ser necesario
+            Expanded(
+              child: SingleChildScrollView(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: _buildInputFields(),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-      // BottomNavigationBar con el botón de siguiente
-      bottomNavigationBar: BottomAppBar(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4.0),
-          child: TextButton(
-            onPressed: () async {
-              // Usar la GlobalKey para validar el formulario
-              if (_formKey.currentState!.validate()) {
-                // Si es válido, ejecutar alguna acción (ej. enviar datos)
-                String qrData = '';
-
-                switch (_selectedType) {
-                  case 'texto':
-                  case 'link':
-                  case 'facebook':
-                    qrData = _textGlobalCtr.text;
-                    break;
-                  case 'contacto':
-                    'BEGIN:VCARD\n'
-                        'VERSION:3.0\n' // Version de vCard
-                        'FN:${_textGlobalCtr.text}\n' // Nombre completo
-                        'ORG:${_enterpriseCtr.text}\n' // Empresa (Opcional)
-                        'TITLE:${_noteCtr.text}\n' // Cargo (Opcional, puedes usar description o note)
-                        'TEL:${_telefonoCtr.text}\n' // Teléfono principal
-                        'EMAIL:${_emailCtr.text}\n' // Correo electrónico
-                        'ADR;TYPE=HOME:${_addressCtr.text};${_cityCtr.text};${_countryCtr.text};\n' // Dirección
-                        'URL:${_urlCtr.text}\n' // Sitio web (Opcional)
-                        'NOTE:${_descriptionCtr.text}\n' // Nota o descripción del contacto (Opcional)
-                        'END:VCARD';
-                    break;
-                  case 'whatsapp':
-                    qrData = 'https://wa.me/${_whatsappCtr.text}?text=Hola';
-                    break;
-                }
-                late final QrCodeModel qrCodeModel;
-                switch (_selectedType) {
-                  case 'texto':
-                    qrCodeModel = QrCodeModel(
-                      id: StringUtil.nanoId(),
-                      data: qrData,
-                      type: _selectedType,
-                      comment: _commentCtr.text,
-                      backgroundColor: Colors.white,
-                      eyeColor: Colors.black,
-                      pointColor: Colors.black,
-                      qrBackgroundColor: Colors.transparent,
-                      text: _textGlobalCtr.text,
-                    );
-                    break;
-                  case 'link':
-                    qrCodeModel = QrCodeModel(
-                      id: StringUtil.nanoId(),
-                      data: qrData,
-                      type: _selectedType,
-                      comment: _commentCtr.text,
-                      backgroundColor: Colors.white,
-                      eyeColor: Colors.black,
-                      pointColor: Colors.black,
-                      qrBackgroundColor: Colors.transparent,
-                      url: _textGlobalCtr.text,
-                    );
-                    break;
-                  case 'facebook':
-                    qrCodeModel = QrCodeModel(
-                      id: StringUtil.nanoId(),
-                      data: qrData,
-                      type: _selectedType,
-                      comment: _commentCtr.text,
-                      backgroundColor: Colors.white,
-                      eyeColor: Colors.black,
-                      pointColor: Colors.black,
-                      qrBackgroundColor: Colors.transparent,
-                      url: _textGlobalCtr.text,
-                    );
-                    break;
-                  case 'contacto':
-                    qrCodeModel = QrCodeModel(
-                      id: StringUtil.nanoId(),
-                      data: qrData,
-                      type: _selectedType,
-                      comment: _commentCtr.text,
-                      backgroundColor: Colors.white,
-                      eyeColor: Colors.black,
-                      pointColor: Colors.black,
-                      qrBackgroundColor: Colors.transparent,
-                      name: _textGlobalCtr.text,
-                      phone: _telefonoCtr.text,
-                      email: _emailCtr.text,
-                      url: _urlCtr.text,
-                      note: _noteCtr.text,
-                      address: _addressCtr.text,
-                      city: _cityCtr.text,
-                      country: _countryCtr.text,
-                      description: _descriptionCtr.text,
-                    );
-                    break;
-                  case 'whatsapp':
-                    qrCodeModel = QrCodeModel(
-                      id: StringUtil.nanoId(),
-                      data: qrData,
-                      type: _selectedType,
-                      comment: _commentCtr.text,
-                      backgroundColor: Colors.white,
-                      eyeColor: Colors.black,
-                      pointColor: Colors.black,
-                      qrBackgroundColor: Colors.transparent,
-                      name: _textGlobalCtr.text,
-                      phone: _whatsappCtr.text,
-                      message: 'Hola',
-                    );
-                    break;
-                }
-                await _irPaginaDos(qrCodeModel);
-              } else {
-                // Si no es válido, mostrar un mensaje
-                Get.snackbar(
-                    'Datos incompletos o incorrectos', 'Formulario no válido',
-                    snackPosition: SnackPosition.BOTTOM);
-              }
-            },
-            child: const Text('SIGUIENTE'),
-          ),
+          ],
         ),
-      ),
-    );
+        // BottomNavigationBar con el botón de siguiente
+        bottomNavigationBar: BottomBarWidget(
+          labelBtn: 'Siguiente',
+          function: () async => validateData(),
+        ));
   }
 
   // Construir los botones de selección del tipo de QR
@@ -409,7 +410,7 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
       controller: _commentCtr,
       maxLines: 3,
       maxLength: 250,
-      labelText: 'Descripción del Código',
+      labelText: 'Descripción del código',
       hintText: 'Descripción para identificar el qr con facilidad',
       validator: (value) {
         if (value!.isEmpty) {

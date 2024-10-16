@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
+import '../features/qr_code/data/data_sources/local/qr_code_database_helper.dart';
+import '../core/widgets/bottom_bar_widget.dart';
 import '../features/qr_code/presentation/widgets/qr_code_widget.dart';
 import '../features/qr_code/data/models/qr_code_model.dart';
 
@@ -31,11 +33,30 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
     qrCodeStepOne = QrCodeModel.fromJson(arguments['qrCodeStepOne']);
   }
 
+  Future<void> saveQrCode() async {
+    try {
+      QrCodeModel newQrCode = QrCodeModel(
+        id: qrCodeStepOne.id,
+        type: qrCodeStepOne.type,
+        data: qrCodeStepOne.data,
+        backgroundColor: _backgroundColor,
+        eyeColor: _eyeColor,
+        pointColor: _qrColor,
+        qrBackgroundColor: _qrBackgroundColor,
+        text: qrCodeStepOne.text,
+        comment: qrCodeStepOne.comment,
+      );
+      await QrCodeDatabaseHelper().insertQrCode(newQrCode);
+    } catch (e) {
+      // print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Generador de QR - Personalización'),
+        title: const Text('2. Personalización de QR'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -79,14 +100,9 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ElevatedButton(
-          onPressed: () {
-            // Lógica para guardar el QR personalizado
-          },
-          child: const Text('Guardar'),
-        ),
+      bottomNavigationBar: BottomBarWidget(
+        labelBtn: 'Guardar',
+        function: () async => saveQrCode(),
       ),
     );
   }
