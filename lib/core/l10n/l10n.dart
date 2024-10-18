@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import './qr_code/l10n_qr_code_create_step_one.dart';
+
 class L10n extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
@@ -14,6 +16,7 @@ class L10n extends Translations {
           'tabSettings': 'Configuraciones',
           'labelThemeLight': 'Claro',
           'labelThemeDark': 'Oscuro',
-        }
+        },
+        ...l10nQrCodeCreateStepOne,
       };
 }

@@ -6,7 +6,7 @@ import 'screens/error_screen.dart';
 import 'screens/splash_screen.dart';
 import 'core/themes/app_theme.dart';
 import 'core/database/local/database_helper.dart';
-import 'core/utils/l10n.dart';
+import 'core/l10n/l10n.dart';
 import 'core/routes/routes_pages.dart';
 // import 'features/qr_code/data/data_sources/local/qr_code_database_helper.dart';
 

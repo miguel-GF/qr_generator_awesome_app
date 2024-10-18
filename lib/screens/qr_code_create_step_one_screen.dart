@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '/core/constants/app_translations_keys/qr_code_create_step_one_translations_keys.dart';
 import '/core/widgets/bottom_bar_widget.dart';
 import '/core/routes/routes_names.dart';
 import '/core/utils/string_util.dart';
@@ -18,6 +19,8 @@ class QrCodeCreateStepOneScreen extends StatefulWidget {
 }
 
 class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
+  QrCodeCreateStepOneTranslationsKeys trKey =
+      QrCodeCreateStepOneTranslationsKeys();
   String _selectedType = 'texto'; // Tipo seleccionado por defecto
   // Key
   final _formKey = GlobalKey<FormState>();
@@ -180,14 +183,14 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('1. Configuración de QR'),
+          title: Text(trKey.title.tr),
         ),
         body: Column(
           children: [
             const SizedBox(height: 16),
-            const Text(
-              'Seleccione el tipo de código que desea generar',
-              style: TextStyle(fontSize: 16),
+            Text(
+              trKey.instruction.tr,
+              style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 16),
             // Slider de tipos de código QR (Horizontal)
@@ -202,13 +205,33 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
                 ),
                 padding: const EdgeInsets.all(20),
                 shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
                 children: [
-                  _buildCodeTypeButton('texto', FontAwesomeIcons.textWidth),
-                  _buildCodeTypeButton('link', FontAwesomeIcons.link),
                   _buildCodeTypeButton(
-                      'contacto', FontAwesomeIcons.addressBook),
-                  _buildCodeTypeButton('whatsapp', FontAwesomeIcons.whatsapp),
-                  _buildCodeTypeButton('facebook', FontAwesomeIcons.facebook),
+                    'texto',
+                    FontAwesomeIcons.textWidth,
+                    trKey.opcText,
+                  ),
+                  _buildCodeTypeButton(
+                    'link',
+                    FontAwesomeIcons.link,
+                    trKey.opcLink,
+                  ),
+                  _buildCodeTypeButton(
+                    'contacto',
+                    FontAwesomeIcons.addressBook,
+                    trKey.opcContact,
+                  ),
+                  _buildCodeTypeButton(
+                    'whatsapp',
+                    FontAwesomeIcons.whatsapp,
+                    trKey.opcWhats,
+                  ),
+                  _buildCodeTypeButton(
+                    'facebook',
+                    FontAwesomeIcons.facebook,
+                    trKey.opcFb,
+                  ),
                 ],
                 // child: ListView(
                 //   scrollDirection: Axis.horizontal,
@@ -242,13 +265,13 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
         ),
         // BottomNavigationBar con el botón de siguiente
         bottomNavigationBar: BottomBarWidget(
-          labelBtn: 'Siguiente',
+          labelBtn: trKey.btnAction.tr,
           function: () async => validateData(),
         ));
   }
 
   // Construir los botones de selección del tipo de QR
-  Widget _buildCodeTypeButton(String type, IconData icon) {
+  Widget _buildCodeTypeButton(String type, IconData icon, String label) {
     bool isSelected = _selectedType == type;
     return GestureDetector(
       onTap: () {
@@ -273,7 +296,7 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              type.capitalizeFirst!,
+              label.tr.capitalizeFirst!,
               style: TextStyle(
                 color: isSelected ? Colors.white : Colors.blue,
                 fontWeight: FontWeight.bold,
@@ -293,7 +316,7 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
         fields.add(
           InputAddNewData(
             controller: _textGlobalCtr,
-            labelText: 'Texto',
+            labelText: trKey.labelText.tr,
             hintText: 'Ingrese el texto para el código QR',
             validator: (value) {
               if (value!.isEmpty) {
@@ -308,7 +331,7 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
         fields.add(
           InputAddNewData(
             controller: _textGlobalCtr,
-            labelText: 'Link',
+            labelText: trKey.labelLink.tr,
             maxLength: 150,
             hintText: 'Ingrese la URL para el código QR',
             validator: (value) {
@@ -324,7 +347,7 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
         fields.addAll([
           InputAddNewData(
             controller: _textGlobalCtr,
-            labelText: 'Nombre de contacto',
+            labelText: trKey.labelContact.tr,
             hintText: 'Ingrese el nombre de contacto',
             validator: (value) {
               if (value!.isEmpty) {
@@ -381,7 +404,7 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
         fields.add(InputAddNewData(
           controller: _whatsappCtr,
           maxLength: 15,
-          labelText: 'Número de whatsapp',
+          labelText: trKey.labelWhats.tr,
           hintText: 'Ingrese el número de whatsapp',
           validator: (value) {
             if (value!.isEmpty) {
@@ -395,7 +418,7 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
         fields.add(InputAddNewData(
           controller: _textGlobalCtr,
           maxLength: 80,
-          labelText: 'URL de facebook',
+          labelText: trKey.labelFb.tr,
           hintText: 'Ingrese el enlace al perfil de facebook',
           validator: (value) {
             if (value!.isEmpty) {
@@ -410,7 +433,7 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
       controller: _commentCtr,
       maxLines: 3,
       maxLength: 250,
-      labelText: 'Descripción del código',
+      labelText: trKey.labelDescription.tr,
       hintText: 'Descripción para identificar el qr con facilidad',
       validator: (value) {
         if (value!.isEmpty) {
