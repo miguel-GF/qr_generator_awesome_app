@@ -317,7 +317,7 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
           InputAddNewData(
             controller: _textGlobalCtr,
             labelText: trKey.labelText.tr,
-            hintText: 'Ingrese el texto para el código QR',
+            hintText: trKey.hintText.tr,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Es requerido';
@@ -333,7 +333,7 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
             controller: _textGlobalCtr,
             labelText: trKey.labelLink.tr,
             maxLength: 150,
-            hintText: 'Ingrese la URL para el código QR',
+            hintText: trKey.hintLink.tr,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Es requerido';
@@ -347,8 +347,8 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
         fields.addAll([
           InputAddNewData(
             controller: _textGlobalCtr,
-            labelText: trKey.labelContact.tr,
-            hintText: 'Ingrese el nombre de contacto',
+            labelText: trKey.labelContactName.tr,
+            hintText: trKey.hintContactName.tr,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Es requerido';
@@ -358,9 +358,9 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
           ),
           InputAddNewData(
             controller: _telefonoCtr,
-            labelText: 'Teléfono de contacto',
+            labelText: trKey.labelContactNumber.tr,
             maxLength: 15,
-            hintText: 'Ingrese el número de teléfono del contacto',
+            hintText: trKey.hintContactNumber.tr,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Es requerido';
@@ -370,33 +370,33 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
           ),
           InputAddNewData(
             controller: _noteCtr,
-            labelText: 'Cargo',
+            labelText: trKey.labelContactProfession.tr,
             maxLength: 15,
-            hintText: 'Ingrese el cargo/puesto del contacto',
+            hintText: trKey.hintContactProfession.tr,
           ),
           InputAddNewData(
             controller: _emailCtr,
-            labelText: 'Email',
+            labelText: trKey.labelContactEmail.tr,
             maxLength: 15,
-            hintText: 'Ingrese el email del contacto',
+            hintText: trKey.hintContactEmail.tr,
           ),
           InputAddNewData(
             controller: _urlCtr,
-            labelText: 'Página web',
+            labelText: trKey.labelContactWeb.tr,
             maxLength: 15,
-            hintText: 'Ingrese el url de la página del contacto',
+            hintText: trKey.hintContactWeb.tr,
           ),
           InputAddNewData(
             controller: _addressCtr,
-            labelText: 'Dirección',
+            labelText: trKey.labelContactAddress.tr,
             maxLength: 15,
-            hintText: 'Ingrese la dirección del contacto',
+            hintText: trKey.hintContactAddress.tr,
           ),
           InputAddNewData(
             controller: _descriptionCtr,
-            labelText: 'Descripción',
+            labelText: trKey.labelContactDescription.tr,
             maxLength: 15,
-            hintText: 'Ingrese una descripción del contacto',
+            hintText: trKey.hintContactDescription.tr,
           ),
         ]);
         break;
@@ -405,7 +405,7 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
           controller: _whatsappCtr,
           maxLength: 15,
           labelText: trKey.labelWhats.tr,
-          hintText: 'Ingrese el número de whatsapp',
+          hintText: trKey.hintWhats.tr,
           validator: (value) {
             if (value!.isEmpty) {
               return 'Es requerido';
@@ -419,7 +419,7 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
           controller: _textGlobalCtr,
           maxLength: 80,
           labelText: trKey.labelFb.tr,
-          hintText: 'Ingrese el enlace al perfil de facebook',
+          hintText: trKey.hintFb.tr,
           validator: (value) {
             if (value!.isEmpty) {
               return 'Es requerido';
@@ -433,8 +433,8 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
       controller: _commentCtr,
       maxLines: 3,
       maxLength: 250,
-      labelText: trKey.labelDescription.tr,
-      hintText: 'Descripción para identificar el qr con facilidad',
+      labelText: trKey.labelComment.tr,
+      hintText: trKey.hintComment.tr,
       validator: (value) {
         if (value!.isEmpty) {
           return 'Es requerido';
