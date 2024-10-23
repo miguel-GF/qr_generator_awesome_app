@@ -10,13 +10,14 @@ class L10n extends Translations {
           'tabSettings': 'Settings',
           'labelThemeLight': 'Light',
           'labelThemeDark': 'Dark',
+          ...l10nQrCodeCreateStepOne['en_US']!,
         },
         'es_MX': {
           'tabFavorites': 'Favoritos',
           'tabSettings': 'Configuraciones',
           'labelThemeLight': 'Claro',
           'labelThemeDark': 'Oscuro',
+          ...l10nQrCodeCreateStepOne['es_MX']!,
         },
-        ...l10nQrCodeCreateStepOne,
       };
 }
