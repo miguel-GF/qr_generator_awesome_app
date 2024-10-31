@@ -45,7 +45,8 @@ class QrCodeDatabaseHelper {
       background_color TEXT,
       eye_color TEXT,
       point_color TEXT,
-      qr_background_color TEXT
+      qr_background_color TEXT,
+      favorite BOOLEAN DEFAULT FALSE
     )
   ''');
   }

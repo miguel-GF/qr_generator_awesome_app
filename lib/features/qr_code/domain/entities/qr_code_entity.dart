@@ -18,6 +18,7 @@ class QrCodeEntity extends Equatable {
   final Color eyeColor;
   final Color pointColor;
   final Color qrBackgroundColor;
+  final bool favorite;
 
   // Propiedades comunes compartidas
   final String? phone; // Usado para WhatsApp, SMS, Teléfono
@@ -72,6 +73,7 @@ class QrCodeEntity extends Equatable {
     this.eyeColor = Colors.black,
     this.pointColor = Colors.black,
     this.qrBackgroundColor = Colors.transparent,
+    this.favorite = false,
     this.phone,
     this.message,
     this.url,
@@ -113,6 +115,7 @@ class QrCodeEntity extends Equatable {
       pointColor,
       qrBackgroundColor,
       phone!,
+      favorite,
       message!,
       url!,
       description!,

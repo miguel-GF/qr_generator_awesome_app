@@ -34,6 +34,10 @@ class QrCodeModel extends QrCodeEntity {
   @BoolIntConverter()
   final bool hidden = false;
 
+  @override
+  @BoolIntConverter()
+  final bool favorite = false;
+
   const QrCodeModel({
     required super.id,
     required super.type,
@@ -61,6 +65,7 @@ class QrCodeModel extends QrCodeEntity {
     super.password,
     super.encryption,
     super.hidden,
+    super.favorite,
     super.eventTitle,
     super.eventStartDate,
     super.eventEndDate,
