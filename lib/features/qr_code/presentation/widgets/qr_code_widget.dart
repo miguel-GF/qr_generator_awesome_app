@@ -7,14 +7,16 @@ class QrCodeWidget extends StatelessWidget {
   const QrCodeWidget({
     super.key,
     required this.qrCodeModel,
+    this.backgroundPadding = 16,
   });
   final QrCodeModel qrCodeModel;
+  final double backgroundPadding;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: qrCodeModel.backgroundColor,
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(backgroundPadding),
       child: QrImageView(
         key: Key(qrCodeModel.id),
         data: qrCodeModel.data,
