@@ -9,6 +9,7 @@ const Color crSecondaryText = Color.fromRGBO(108, 117, 125, 1);
 const Color crSuccess = Color.fromRGBO(40, 167, 69, 1);
 const Color crWarning = Color.fromRGBO(255, 193, 7, 1);
 const Color crError = Color.fromRGBO(220, 53, 69, 1);
+const Color crCaption = Color.fromRGBO(213, 213, 213, 1);
 
 // Colors dark
 const Color crPrimaryDark = Color.fromRGBO(0, 119, 204, 1);
@@ -19,3 +20,4 @@ const Color crSecondaryTextDark = Color.fromRGBO(200, 200, 200, 1);
 const Color crSuccessDark = Color.fromRGBO(76, 175, 80, 1);
 const Color crWarningDark = Color.fromRGBO(255, 214, 10, 1);
 const Color crErrorDark = Color.fromRGBO(255, 82, 82, 1);
+const Color crCaptionDark = Color.fromRGBO(213, 213, 213, 1);

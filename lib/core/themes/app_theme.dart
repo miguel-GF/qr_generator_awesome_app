@@ -44,6 +44,16 @@ final lightTheme = ThemeData(
       )),
     ),
   ),
+  textTheme: const TextTheme(
+    headlineMedium: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      color: crPrimaryText,
+    ),
+  ),
+  hintColor: crCaption,
+  shadowColor: crBackground,
+  primaryColor: crPrimary,
 );
 
 final darkTheme = ThemeData(
@@ -89,4 +99,14 @@ final darkTheme = ThemeData(
       )),
     ),
   ),
+  textTheme: const TextTheme(
+    headlineMedium: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      color: crPrimaryTextDark,
+    ),
+  ),
+  hintColor: crCaptionDark,
+  shadowColor: crBackgroundDark,
+  primaryColor: crPrimaryDark,
 );
