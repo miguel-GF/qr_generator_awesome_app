@@ -36,10 +36,7 @@ QrCodeModel _$QrCodeModelFromJson(Map<String, dynamic> json) => QrCodeModel(
       encryption: json['encryption'] as String?,
       hidden: _$JsonConverterFromJson<int, bool>(
           json['hidden'], const BoolIntConverter().fromJson),
-      favorite: json['favorite'] == null
-          ? false
-          : const BoolIntConverter()
-              .fromJson((json['favorite'] as num).toInt()),
+      favorite: json['favorite'] as String? ?? 'no',
       eventTitle: json['event_title'] as String?,
       eventStartDate: json['event_start_date'] == null
           ? null
@@ -68,6 +65,7 @@ Map<String, dynamic> _$QrCodeModelToJson(QrCodeModel instance) =>
       'padding': instance.padding,
       'eye_type': instance.eyeType,
       'point_type': instance.pointType,
+      'favorite': instance.favorite,
       'phone': instance.phone,
       'message': instance.message,
       'url': instance.url,
@@ -97,7 +95,6 @@ Map<String, dynamic> _$QrCodeModelToJson(QrCodeModel instance) =>
           const ColorConverter().toJson(instance.qrBackgroundColor),
       'gapless': const BoolIntConverter().toJson(instance.gapless),
       'hidden': const BoolIntConverter().toJson(instance.hidden),
-      'favorite': const BoolIntConverter().toJson(instance.favorite),
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(

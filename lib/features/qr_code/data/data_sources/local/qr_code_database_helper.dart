@@ -46,7 +46,7 @@ class QrCodeDatabaseHelper {
       eye_color TEXT,
       point_color TEXT,
       qr_background_color TEXT,
-      favorite BOOLEAN DEFAULT FALSE
+      favorite VARCHAR(2)
     )
   ''');
   }
@@ -71,5 +71,15 @@ class QrCodeDatabaseHelper {
     return List.generate(maps.length, (i) {
       return QrCodeModel.fromJson(maps[i]);
     });
+  }
+
+  // Método para actualizar la prop favorite
+  Future<int> updateFavorite(String id, String favorite) async {
+    final Database? db = await DatabaseHelper().database;
+
+    return await db!.rawUpdate(
+      'UPDATE $tableQrCode SET favorite = ? WHERE id = ?', // Consulta SQL
+      [favorite, id], // Valores para los placeholders `?`
+    );
   }
 }

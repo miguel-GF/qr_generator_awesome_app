@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:equatable/equatable.dart';
@@ -18,7 +18,7 @@ class QrCodeEntity extends Equatable {
   final Color eyeColor;
   final Color pointColor;
   final Color qrBackgroundColor;
-  final bool favorite;
+  String favorite;
 
   // Propiedades comunes compartidas
   final String? phone; // Usado para WhatsApp, SMS, Teléfono
@@ -59,7 +59,7 @@ class QrCodeEntity extends Equatable {
   // Redes sociales (URL reutilizada para varias plataformas)
   // Twitter, YouTube, App Store/Play Store, y otras plataformas utilizan la propiedad url
 
-  const QrCodeEntity({
+  QrCodeEntity({
     required this.id,
     required this.type,
     required this.data,
@@ -73,7 +73,7 @@ class QrCodeEntity extends Equatable {
     this.eyeColor = Colors.black,
     this.pointColor = Colors.black,
     this.qrBackgroundColor = Colors.transparent,
-    this.favorite = false,
+    this.favorite = 'no',
     this.phone,
     this.message,
     this.url,

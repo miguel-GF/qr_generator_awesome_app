@@ -1,4 +1,4 @@
-// ignore_for_file: overridden_fields
+// ignore_for_file: overridden_fields, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -34,11 +34,7 @@ class QrCodeModel extends QrCodeEntity {
   @BoolIntConverter()
   final bool hidden = false;
 
-  @override
-  @BoolIntConverter()
-  final bool favorite = false;
-
-  const QrCodeModel({
+  QrCodeModel({
     required super.id,
     required super.type,
     required super.data,

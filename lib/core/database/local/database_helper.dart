@@ -57,7 +57,7 @@ class DatabaseHelper {
   // Método para eliminar la base de datos
   Future<void> clearDatabase() async {
     String path = join(await getDatabasesPath(), databaseName);
-     await deleteDatabase(path); // Elimina el archivo de la base de datos
+    await deleteDatabase(path); // Elimina el archivo de la base de datos
     _database = null; // Reinicia la referencia a la base de datos
     // print('Base de datos eliminada');
   }

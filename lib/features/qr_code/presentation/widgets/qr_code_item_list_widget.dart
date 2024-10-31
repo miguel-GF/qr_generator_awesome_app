@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../data/models/qr_code_model.dart';
 import 'qr_code_widget.dart';
 
@@ -8,8 +9,10 @@ class QrCodeItemListWidget extends StatelessWidget {
   const QrCodeItemListWidget({
     super.key,
     required this.qrCode,
+    this.onFavorite,
   });
   final QrCodeModel qrCode;
+  final VoidCallback? onFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -53,16 +56,41 @@ class QrCodeItemListWidget extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 8),
               child: Column(
                 children: [
-                  Text(
-                    qrCode.type,
-                    textAlign: TextAlign.start,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            qrCode.type,
+                            textAlign: TextAlign.start,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: onFavorite,
+                          child: Icon(
+                            qrCode.favorite == 'no'
+                                ? FontAwesomeIcons.heart
+                                : FontAwesomeIcons.solidHeart,
+                            color: qrCode.favorite == 'no' ? null : Colors.red,
+                            size: 26,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(height: 4),
-                  Text(
-                    qrCode.comment,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          qrCode.comment,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
