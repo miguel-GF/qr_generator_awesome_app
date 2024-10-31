@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen>
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       _controller.addStatusListener((status) {
         if (status == AnimationStatus.completed) {
-          Get.offAndToNamed(nameCreateQrCodeStepOneScreen);
+          Get.offAndToNamed(nameHomeScreen);
         }
       });
     });
