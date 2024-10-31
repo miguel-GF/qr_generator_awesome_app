@@ -1,6 +1,8 @@
 import 'package:bottom_bar/bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:get/get.dart';
+import '/core/widgets/double_icon_button_widget.dart';
+import '/core/routes/routes_names.dart';
 import '/core/utils/theme_util.dart';
 import '/core/themes/colors_palette.dart';
 import '/screens/home/home_favorites_widget.dart';
@@ -19,9 +21,21 @@ class _HomeScreenState extends State<HomeScreen> {
   final _pageController = PageController();
 
   Widget baseLayout({required Widget widget}) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      child: widget,
+    return Stack(
+      children: [
+        SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: widget,
+        ),
+        // BOTON QUE ESTA POR DENTRO DE TODOS LOS WIDGETS HIJOS DE HOME SCREEN
+        // Positioned(
+        //   top: 4,
+        //   right: 8,
+        //   child: DoubleIconButtonWidget(
+        //     onTap: () => Get.toNamed(nameCreateQrCodeStepOneScreen),
+        //   ),
+        // ),
+      ],
     );
   }
 
@@ -30,6 +44,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
+        actions: <Widget>[
+          Visibility(
+            visible: _currentPage <= 1,
+            child: DoubleIconButtonWidget(
+              onTap: () => Get.toNamed(nameCreateQrCodeStepOneScreen),
+            ),
+          ),
+        ],
       ),
       body: PageView(
         controller: _pageController,
