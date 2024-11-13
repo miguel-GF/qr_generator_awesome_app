@@ -7,7 +7,7 @@ import 'package:qr_awesome_generator/features/qr_code/data/models/qr_code_model.
 import '../../../../helpers/json_reader.dart';
 
 void main() {
-  const testQrCodeModel = QrCodeModel(
+  var testQrCodeModel = QrCodeModel(
     id: 'soyIdUno',
     type: 'text',
     data: 'data',

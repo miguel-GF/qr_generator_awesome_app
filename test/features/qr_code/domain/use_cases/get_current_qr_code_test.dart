@@ -14,17 +14,17 @@ void main() {
     getCurrentQrCodeUseCase = GetCurrentQrCodeUseCase(mockQrCodeRepository);
   });
 
-  const testQrCode = QrCodeEntity(id: '#1', type: 'text', data: 'data');
+  var testQrCode = QrCodeEntity(id: '#1', type: 'text', data: 'data');
   const testId = '#1';
 
   test('should get current qr code from the repository', () async {
     //arrange
     when(mockQrCodeRepository.getCurrentQrCode(testId))
-        .thenAnswer((_) async => const Right(testQrCode));
+        .thenAnswer((_) async => Right(testQrCode));
     //act
     final result = await getCurrentQrCodeUseCase(testId);
     //assert
-    expect(result, const Right(testQrCode));
+    expect(result, Right(testQrCode));
     verify(mockQrCodeRepository.getCurrentQrCode(testId));
     verifyNoMoreInteractions(mockQrCodeRepository);
   });
