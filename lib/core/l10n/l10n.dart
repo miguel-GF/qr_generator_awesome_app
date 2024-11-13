@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import './qr_code/l10n_qr_code_create_step_one.dart';
+import './qr_code/l10n_qr_code_create_success.dart';
 
 class L10n extends Translations {
   @override
@@ -11,6 +12,7 @@ class L10n extends Translations {
           'labelThemeLight': 'Light',
           'labelThemeDark': 'Dark',
           ...l10nQrCodeCreateStepOne['en_US']!,
+          ...l10nQrCodeCreateSuccess['en_US']!,
         },
         'es_MX': {
           'tabFavorites': 'Favoritos',
@@ -18,6 +20,7 @@ class L10n extends Translations {
           'labelThemeLight': 'Claro',
           'labelThemeDark': 'Oscuro',
           ...l10nQrCodeCreateStepOne['es_MX']!,
+          ...l10nQrCodeCreateSuccess['es_MX']!,
         },
       };
 }
