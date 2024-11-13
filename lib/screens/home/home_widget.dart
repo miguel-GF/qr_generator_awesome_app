@@ -34,7 +34,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       final res = await QrCodeDatabaseHelper()
           .updateFavorite(qrCode.id, newFavoriteValue);
 
-      // Si la actualización fue exitosa, actualiza el modelo local y la interfaz
+      // Si la actualización fue exitosa, actualiza modelo local y la interfaz
       if (res == 1) {
         setState(() {
           qrCode.favorite =

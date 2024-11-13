@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
+import '../core/routes/routes_names.dart';
 import '../features/qr_code/data/data_sources/local/qr_code_database_helper.dart';
 import '../core/widgets/bottom_bar_widget.dart';
 import '../features/qr_code/presentation/widgets/qr_code_widget.dart';
@@ -47,8 +48,9 @@ class _QrCodeCreateStepTwoScreenState extends State<QrCodeCreateStepTwoScreen> {
         comment: qrCodeStepOne.comment,
       );
       await QrCodeDatabaseHelper().insertQrCode(newQrCode);
+      Get.toNamed(nameCreateQrCodeSuccess);
     } catch (e) {
-      // print(e);
+      print('error al guardar nuevo codigo qr $e');
     }
   }
 
