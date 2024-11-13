@@ -50,6 +50,11 @@ final lightTheme = ThemeData(
       fontWeight: FontWeight.w500,
       color: crPrimaryText,
     ),
+    headlineLarge: TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+      color: crPrimaryText,
+    ),
   ),
   hintColor: crCaption,
   shadowColor: crBackground,
@@ -103,6 +108,11 @@ final darkTheme = ThemeData(
     headlineMedium: TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w500,
+      color: crPrimaryTextDark,
+    ),
+    headlineLarge: TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
       color: crPrimaryTextDark,
     ),
   ),
