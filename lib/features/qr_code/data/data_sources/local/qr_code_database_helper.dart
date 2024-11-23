@@ -1,3 +1,4 @@
+import 'package:qr_awesome_generator/core/utils/params_util.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../../../../core/database/local/database_helper.dart';
@@ -64,9 +65,28 @@ class QrCodeDatabaseHelper {
   }
 
   // Método para obtener todos los QR Codes
-  Future<List<QrCodeModel>> getQrCodes() async {
+  Future<List<QrCodeModel>> getQrCodes({Map<String, dynamic>? filters}) async {
     final Database? db = await DatabaseHelper().database;
-    final List<Map<String, dynamic>> maps = await db!.query(tableQrCode);
+    final Map<String, dynamic> newFilters = ParamsUtil.paramsCamelToSnakeCase(
+      filters: filters,
+    );
+    final List<String> whereClauses = ParamsUtil.generateWhereClauses(
+      filters: newFilters,
+    );
+    final List<dynamic> whereArgs = ParamsUtil.generateWhereArgs(
+      filters: newFilters,
+    );
+    // final List<Map<String, dynamic>> maps = await db!.query(tableQrCode);
+
+    final String whereString = whereClauses.isNotEmpty
+        ? whereClauses.join(' AND ')
+        : ''; // Sin WHERE si no hay filtros válidos
+
+    final List<Map<String, dynamic>> maps = await db!.query(
+      tableQrCode,
+      where: whereString.isNotEmpty ? whereString : null,
+      whereArgs: whereArgs.isNotEmpty ? whereArgs : null,
+    );
 
     return List.generate(maps.length, (i) {
       return QrCodeModel.fromJson(maps[i]);

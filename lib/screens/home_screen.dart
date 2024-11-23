@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: Text('titleHome'.tr),
         actions: <Widget>[
           Visibility(
             visible: _currentPage <= 1,
