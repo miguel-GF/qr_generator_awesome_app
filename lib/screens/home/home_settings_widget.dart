@@ -47,9 +47,7 @@ class HomeSettingsWidget extends StatelessWidget {
             );
           },
           separatorBuilder: (context, index) {
-            return const Divider(
-              height: 0,
-            );
+            return const Divider();
           },
         ),
       ],

@@ -56,6 +56,10 @@ final lightTheme = ThemeData(
       color: crPrimaryText,
     ),
   ),
+  dividerTheme: const DividerThemeData(
+    space: 1,
+    color: crCaption,
+  ),
   hintColor: crCaption,
   shadowColor: crBackground,
   primaryColor: crPrimary,
@@ -115,6 +119,10 @@ final darkTheme = ThemeData(
       fontWeight: FontWeight.w600,
       color: crPrimaryTextDark,
     ),
+  ),
+  dividerTheme: const DividerThemeData(
+    space: 1,
+    color: crCaptionDark,
   ),
   hintColor: crCaptionDark,
   shadowColor: crBackgroundDark,
