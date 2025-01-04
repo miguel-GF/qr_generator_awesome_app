@@ -18,6 +18,7 @@ class QrCodeCreateStepOneTranslationsKeys {
   String labelContactAddress = '${prefix}LabelContactAddress';
   String labelContactDescription = '${prefix}LabelContactDescription';
   String labelWhats = '${prefix}LabelWhats';
+  String labelWhatsMessage = '${prefix}LabelWhatsMessage';
   String labelFb = '${prefix}LabelFb';
   String labelComment = '${prefix}LabelComment';
   String hintText = '${prefix}HintText';
@@ -30,6 +31,7 @@ class QrCodeCreateStepOneTranslationsKeys {
   String hintContactAddress = '${prefix}HintContactAddress';
   String hintContactDescription = '${prefix}HintContactDescription';
   String hintWhats = '${prefix}HintWhats';
+  String hintWhatsMessage = '${prefix}HintWhatsMessage';
   String hintFb = '${prefix}HintFb';
   String hintComment = '${prefix}HintComment';
   String btnAction = '${prefix}BtnAction';

@@ -21,6 +21,7 @@ Map<String, Map<String, String>> l10nQrCodeCreateStepOne = {
     tk.labelContactAddress: 'Address',
     tk.labelContactDescription: 'Description',
     tk.labelWhats: 'Whatsapp number',
+    tk.labelWhatsMessage: 'Default message',
     tk.labelFb: 'Facebook URL',
     tk.labelComment: 'Code comments',
     tk.hintText: 'Enter text for QR code',
@@ -33,6 +34,8 @@ Map<String, Map<String, String>> l10nQrCodeCreateStepOne = {
     tk.hintContactAddress: 'Enter contact address',
     tk.hintContactDescription: 'Description to identify contact',
     tk.hintWhats: 'Enter whatsapp number',
+    tk.hintWhatsMessage:
+        'Enter the default message to load when reading the QR code',
     tk.hintFb: 'Enter the link to the facebook profile',
     tk.hintComment: 'Comments to identify the QR easily',
     tk.btnAction: 'Next',
@@ -55,6 +58,7 @@ Map<String, Map<String, String>> l10nQrCodeCreateStepOne = {
     tk.labelContactAddress: 'Dirección',
     tk.labelContactDescription: 'Descripción',
     tk.labelWhats: 'Número de whatsapp',
+    tk.labelWhatsMessage: 'Mensaje predeterminado',
     tk.labelFb: 'URL de facebook',
     tk.labelComment: 'Comentarios del código',
     tk.hintText: 'Ingrese el texto para el código QR',
@@ -67,6 +71,8 @@ Map<String, Map<String, String>> l10nQrCodeCreateStepOne = {
     tk.hintContactAddress: 'Ingrese la dirección del contacto',
     tk.hintContactDescription: 'Descripción para identificar el contacto',
     tk.hintWhats: 'Ingrese el número de whatsapp',
+    tk.hintWhatsMessage:
+        'Ingrese el mensaje predeterminado que se cargará al leer el código QR',
     tk.hintFb: 'Ingrese el enlace al perfil de facebook',
     tk.hintComment: 'Comentarios para identificar el QR con facilidad',
     tk.btnAction: 'Siguiente',

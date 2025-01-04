@@ -74,12 +74,12 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
             qrData = _textGlobalCtr.text;
             break;
           case 'contacto':
-            'BEGIN:VCARD\n'
+            qrData = 'BEGIN:VCARD\n'
                 'VERSION:3.0\n' // Version de vCard
                 'FN:${_textGlobalCtr.text}\n' // Nombre completo
                 'ORG:${_enterpriseCtr.text}\n' // Empresa (Opcional)
                 'TITLE:${_noteCtr.text}\n' // Cargo (Opcional, puedes usar description o note)
-                'TEL:${_telefonoCtr.text}\n' // Teléfono principal
+                'TEL;TYPE=CELL:${_telefonoCtr.text}\n' // Teléfono principal
                 'EMAIL:${_emailCtr.text}\n' // Correo electrónico
                 'ADR;TYPE=HOME:${_addressCtr.text};${_cityCtr.text};${_countryCtr.text};\n' // Dirección
                 'URL:${_urlCtr.text}\n' // Sitio web (Opcional)
@@ -87,7 +87,10 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
                 'END:VCARD';
             break;
           case 'whatsapp':
-            qrData = 'https://wa.me/${_whatsappCtr.text}?text=Hola';
+            String encodedMessage = _textGlobalCtr.text.isNotEmpty
+                ? Uri.encodeComponent(_textGlobalCtr.text)
+                : '';
+            qrData = 'https://wa.me/${_whatsappCtr.text}?text=$encodedMessage';
             break;
         }
         late final QrCodeModel qrCodeModel;
@@ -377,7 +380,7 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
           InputAddNewData(
             controller: _emailCtr,
             labelText: trKey.labelContactEmail.tr,
-            maxLength: 15,
+            maxLength: 80,
             hintText: trKey.hintContactEmail.tr,
           ),
           InputAddNewData(
@@ -412,6 +415,13 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
             }
             return null;
           },
+        ));
+        fields.add(InputAddNewData(
+          controller: _textGlobalCtr,
+          maxLines: 2,
+          maxLength: 150,
+          labelText: trKey.labelWhatsMessage.tr,
+          hintText: trKey.hintWhatsMessage.tr,
         ));
         break;
       case 'facebook':
