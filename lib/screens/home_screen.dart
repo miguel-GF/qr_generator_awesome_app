@@ -66,35 +66,53 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() => _currentPage = index);
         },
       ),
-      bottomNavigationBar: BottomBar(
-        selectedIndex: _currentPage,
-        onTap: (int index) {
-          _pageController.jumpToPage(index);
-          setState(() => _currentPage = index);
-        },
-        items: <BottomBarItem>[
-          BottomBarItem(
-            icon: const Icon(Icons.home),
-            title: const Text('Home'),
-            activeColor: ThemeUtil.isDarkMode() ? crPrimary : crPrimaryDark,
-            inactiveColor:
-                ThemeUtil.isDarkMode() ? crSecondary : crSecondaryDark,
-          ),
-          BottomBarItem(
-            icon: const Icon(Icons.favorite),
-            title: Text('tabFavorites'.tr),
-            activeColor: Colors.red,
-            inactiveColor:
-                ThemeUtil.isDarkMode() ? crSecondary : crSecondaryDark,
-          ),
-          BottomBarItem(
-            icon: const Icon(Icons.settings),
-            title: Text('tabSettings'.tr),
-            activeColor: ThemeUtil.isDarkMode() ? crPrimary : crPrimaryDark,
-            inactiveColor:
-                ThemeUtil.isDarkMode() ? crSecondary : crSecondaryDark,
-          ),
-        ],
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).brightness == Brightness.dark
+              ? crBackground
+              : Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? crBackground.withOpacity(0.4)
+                  : Colors.black
+                      .withOpacity(0.4), // Sombra visible en modo oscuro
+              blurRadius: 10,
+              offset: const Offset(0, -5),
+            ),
+          ],
+        ),
+        child: BottomBar(
+          selectedIndex: _currentPage,
+          onTap: (int index) {
+            _pageController.jumpToPage(index);
+            setState(() => _currentPage = index);
+          },
+          backgroundColor: Colors.transparent,
+          items: <BottomBarItem>[
+            BottomBarItem(
+              icon: const Icon(Icons.home),
+              title: const Text('Home'),
+              activeColor: !ThemeUtil.isDarkMode() ? crPrimary : crPrimaryDark,
+              inactiveColor:
+                  !ThemeUtil.isDarkMode() ? crSecondary : crSecondaryDark,
+            ),
+            BottomBarItem(
+              icon: const Icon(Icons.favorite),
+              title: Text('tabFavorites'.tr),
+              activeColor: Colors.red,
+              inactiveColor:
+                  !ThemeUtil.isDarkMode() ? crSecondary : crSecondaryDark,
+            ),
+            BottomBarItem(
+              icon: const Icon(Icons.settings),
+              title: Text('tabSettings'.tr),
+              activeColor: !ThemeUtil.isDarkMode() ? crPrimary : crPrimaryDark,
+              inactiveColor:
+                  !ThemeUtil.isDarkMode() ? crSecondary : crSecondaryDark,
+            ),
+          ],
+        ),
       ),
     );
   }
