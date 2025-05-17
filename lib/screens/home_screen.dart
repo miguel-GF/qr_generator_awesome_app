@@ -8,6 +8,7 @@ import '/core/themes/colors_palette.dart';
 import '/screens/home/home_favorites_widget.dart';
 import '/screens/home/home_settings_widget.dart';
 import '/screens/home/home_widget.dart';
+import 'home/home_cards_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -46,9 +47,16 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('titleHome'.tr),
         actions: <Widget>[
           Visibility(
-            visible: _currentPage <= 1,
+            visible: _currentPage == 0,
             child: DoubleIconButtonWidget(
               onTap: () => Get.toNamed(nameCreateQrCodeStepOneScreen),
+            ),
+          ),
+          Visibility(
+            visible: _currentPage == 1,
+            child: DoubleIconButtonWidget(
+              iconMain: Icons.person,
+              onTap: () => Get.toNamed(nameCreateBusinessCard),
             ),
           ),
         ],
@@ -57,6 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
         controller: _pageController,
         children: [
           baseLayout(widget: const HomeWidget()),
+          baseLayout(widget: const HomeCardsWidget()),
           baseLayout(widget: const HomeFavoritesWidget()),
           baseLayout(widget: const HomeSettingsWidget()),
         ],
@@ -93,6 +102,13 @@ class _HomeScreenState extends State<HomeScreen> {
             BottomBarItem(
               icon: const Icon(Icons.home),
               title: const Text('Home'),
+              activeColor: !ThemeUtil.isDarkMode() ? crPrimary : crPrimaryDark,
+              inactiveColor:
+                  !ThemeUtil.isDarkMode() ? crSecondary : crSecondaryDark,
+            ),
+            BottomBarItem(
+              icon: const Icon(Icons.contact_emergency),
+              title: Text('tabCards'.tr),
               activeColor: !ThemeUtil.isDarkMode() ? crPrimary : crPrimaryDark,
               inactiveColor:
                   !ThemeUtil.isDarkMode() ? crSecondary : crSecondaryDark,

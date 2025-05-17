@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '../../data/models/qr_code_model.dart';
 import 'qr_code_widget.dart';
 
-class QrCodeItemListWidget extends StatelessWidget {
-  const QrCodeItemListWidget({
+class QrCodeItemTileWidget extends StatelessWidget {
+  const QrCodeItemTileWidget({
     super.key,
     required this.qrCode,
   });
