@@ -6,6 +6,7 @@ import '../../screens/qr_code_create_step_two_screen.dart';
 import '../../screens/qr_code_create_success.dart';
 import '../../screens/business_card_create_screen.dart';
 import '../../screens/business_card_create_step_two_screen.dart';
+import '../../screens/business_card_create_step_three_screen.dart';
 import 'routes_names.dart';
 
 final getPages = [
@@ -26,5 +27,9 @@ final getPages = [
   GetPage(
     name: nameCreateBusinessCardStepTwo,
     page: () => const BusinessCardCreateStepTwoScreen(),
+  ),
+  GetPage(
+    name: nameCreateBusinessCardStepThree,
+    page: () => const BusinessCardCreateStepThreeScreen(),
   ),
 ];

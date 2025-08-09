@@ -4,3 +4,4 @@ const String nameCreateQrCodeStepTwoScreen = '/qr-create-two';
 const String nameCreateQrCodeSuccess = '/qr-create-success';
 const String nameCreateBusinessCard = '/business-card-create';
 const String nameCreateBusinessCardStepTwo = '/business-card-create-two';
+const String nameCreateBusinessCardStepThree = '/business-card-create-three';

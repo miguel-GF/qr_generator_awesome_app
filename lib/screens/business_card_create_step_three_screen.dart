@@ -3,22 +3,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../core/routes/routes_names.dart';
 import '../core/widgets/bottom_bar_widget.dart';
 import '../features/qr_code/data/models/qr_code_model.dart';
 import '../widgets/business_card/color_picker_dialog.dart';
 
-class BusinessCardCreateStepTwoScreen extends StatefulWidget {
-  const BusinessCardCreateStepTwoScreen({super.key});
+class BusinessCardCreateStepThreeScreen extends StatefulWidget {
+  const BusinessCardCreateStepThreeScreen({super.key});
 
   @override
-  State<BusinessCardCreateStepTwoScreen> createState() =>
-      _BusinessCardCreateStepTwoScreenState();
+  State<BusinessCardCreateStepThreeScreen> createState() =>
+      _BusinessCardCreateStepThreeScreenState();
 }
 
-class _BusinessCardCreateStepTwoScreenState
-    extends State<BusinessCardCreateStepTwoScreen> {
+class _BusinessCardCreateStepThreeScreenState
+    extends State<BusinessCardCreateStepThreeScreen> {
   late final QrCodeModel cardQrCodeStepOne;
+  late final BoxDecoration boxDecorationStepTwo;
 
   @override
   void initState() {
@@ -26,8 +26,11 @@ class _BusinessCardCreateStepTwoScreenState
     final Map<String, dynamic> arguments =
         Get.arguments as Map<String, dynamic>;
     cardQrCodeStepOne = QrCodeModel.fromJson(arguments['cardQrCodeStepOne']);
+    boxDecorationStepTwo = arguments['boxDecoration'];
     print('id qr');
     print(cardQrCodeStepOne.id);
+    print('boxdecoration');
+    print(boxDecorationStepTwo);
   }
 
   bool isGradient = false;
@@ -74,10 +77,7 @@ class _BusinessCardCreateStepTwoScreenState
       decoration = BoxDecoration(color: color1);
     }
 
-    Get.toNamed(nameCreateBusinessCardStepTwo, arguments: <String, dynamic>{
-      'cardQrCodeStepOne': cardQrCodeStepOne.toJson(),
-      'decorationStepTwo': decoration,
-    });
+    Navigator.pop(context, decoration);
   }
 
   Widget _buildFullWidthPreview(BoxDecoration decoration) {
@@ -112,7 +112,7 @@ class _BusinessCardCreateStepTwoScreenState
           );
 
     return Scaffold(
-      appBar: AppBar(title: Text('2. Seleccionar fondo')),
+      appBar: AppBar(title: Text('3. Introducir texto')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
