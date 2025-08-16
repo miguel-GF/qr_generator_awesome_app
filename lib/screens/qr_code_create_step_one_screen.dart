@@ -174,8 +174,13 @@ class _QrCodeCreateStepOneScreenState extends State<QrCodeCreateStepOneScreen> {
         await _irPaginaDos(qrCodeModel);
       } else {
         // Si no es válido, mostrar un mensaje
-        Get.snackbar('Datos incompletos o incorrectos', 'Formulario no válido',
-            snackPosition: SnackPosition.BOTTOM);
+        Get.snackbar(
+          'Datos incompletos o incorrectos',
+          'Por favor, corrige los errores en el formulario.',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
       }
     } catch (e) {
       // print(e);

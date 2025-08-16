@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:qr_awesome_generator/core/database/local/business_card_database_helper.dart';
+import 'package:qr_awesome_generator/models/business_card_model.dart';
 import '../../core/widgets/main_title_widget.dart';
-import '../../features/qr_code/data/data_sources/local/qr_code_database_helper.dart';
-import '../../features/qr_code/data/models/qr_code_model.dart';
-import '../../features/qr_code/presentation/widgets/qr_code_item_list_widget.dart';
+import 'package:qr_awesome_generator/features/business_card/presentation/widgets/business_card_display_widget.dart';
+
+import 'package:qr_awesome_generator/features/business_card/data/models/full_busines_card_display_data.dart';
+import 'package:qr_awesome_generator/features/qr_code/data/data_sources/local/qr_code_database_helper.dart';
 
 class HomeCardsWidget extends StatefulWidget {
   const HomeCardsWidget({super.key});
@@ -12,32 +15,49 @@ class HomeCardsWidget extends StatefulWidget {
 }
 
 class _HomeCardsWidgetState extends State<HomeCardsWidget> {
-  late Future<List<QrCodeModel>> _qrCodesList;
+  late Future<List<FullBusinessCardDisplayData>> _cardsToDisplay;
 
   @override
   void initState() {
     super.initState();
-    _qrCodesList = _getQrCodes();
+    _cardsToDisplay = _loadBusinessCardsWithQRs();
   }
 
-  // Método que devuelve el Future de la lista de códigos QR
-  Future<List<QrCodeModel>> _getQrCodes() async {
-    return await QrCodeDatabaseHelper().getQrCodes();
+  Future<List<FullBusinessCardDisplayData>> _loadBusinessCardsWithQRs() async {
+    final businessCardHelper = BusinessCardDatabaseHelper();
+    final qrCodeHelper =
+        QrCodeDatabaseHelper(); // Instancia de tu helper de QR Codes
+
+    final businessCards = await businessCardHelper.getBusinessCards();
+    final List<FullBusinessCardDisplayData> fullCards = [];
+
+    for (final bc in businessCards) {
+      final qrCode = await qrCodeHelper.getQrCodeById(bc.qrCodeId);
+
+      if (qrCode != null) {
+        fullCards
+            .add(FullBusinessCardDisplayData(businessCard: bc, qrCode: qrCode));
+      } else {
+        print(
+            'Advertencia: QR Code con ID ${bc.qrCodeId} no encontrado.');
+      }
+    }
+    return fullCards;
   }
 
-  Future<void> _onFavorite(QrCodeModel qrCode) async {
+  Future<void> _onFavorite(BusinessCardModel businessCard) async {
     // Cambia el valor de favorite a su inverso
-    final newFavoriteValue = qrCode.favorite == 'no' ? 'si' : 'no';
+    final newFavoriteValue = businessCard.favorite == 'no' ? 'si' : 'no';
 
     try {
       // Actualiza el valor en la base de datos con el valor correcto
-      final res = await QrCodeDatabaseHelper()
-          .updateFavorite(qrCode.id, newFavoriteValue);
+      final res = await BusinessCardDatabaseHelper()
+          .updateFavorite(businessCard.businessCardId, newFavoriteValue);
 
       // Si la actualización fue exitosa, actualiza modelo local y la interfaz
       if (res == 1) {
         setState(() {
-          qrCode.favorite =
+          businessCard.favorite =
               newFavoriteValue; // Actualiza el valor del modelo local
         });
       }
@@ -48,52 +68,52 @@ class _HomeCardsWidgetState extends State<HomeCardsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<QrCodeModel>>(
-      future: _qrCodesList, // Future que queremos esperar
+    return FutureBuilder<List<FullBusinessCardDisplayData>>(
+      future: _cardsToDisplay,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          // Muestra un indicador de carga mientras el Future se resuelve
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
-            // Muestra un mensaje si hay un error en el Future
             return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (snapshot.hasData) {
-            // Muestra la lista de códigos QR cuando el Future se completa
-            final qrCodes = snapshot.data!;
+          } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+            final cards = snapshot.data!;
             return Column(
               children: [
                 const MainTitleWidget(
-                  title: 'Códigos QR que has generado',
+                  title: 'Tarjetas de Presentación que has creado',
                 ),
-                GridView.builder(
+                // Aquí cambiamos de GridView.builder a ListView.builder
+                ListView.separated(
                   shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: qrCodes.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // Número de columnas
-                    crossAxisSpacing: 16, // Espacio horizontal entre columnas
-                    mainAxisSpacing: 16, // Espacio vertical entre filas
-                    childAspectRatio: 1 / 1.7,
-                  ),
-                  itemBuilder: (context, index) {
-                    return QrCodeItemListWidget(
-                      key: ValueKey(qrCodes[index].id),
-                      qrCode: qrCodes[index],
-                      onFavorite: () => _onFavorite(qrCodes[index]),
+                  itemCount: cards.length,
+                  separatorBuilder: (context, index) {
+                    return const Divider(
+                      height: 24,
                     );
                   },
-                )
+                  itemBuilder: (context, index) {
+                    final fullCardData = cards[index];
+                    return SizedBox(
+                      child: BusinessCardDisplayWidget(
+                        key: ValueKey(fullCardData.businessCard.businessCardId),
+                        businessCard: fullCardData.businessCard,
+                        qrCode: fullCardData.qrCode,
+                        showVaforite: true,
+                        onFavorite: () =>
+                            _onFavorite(fullCardData.businessCard),
+                      ),
+                    );
+                  },
+                ),
               ],
             );
           } else {
-            // Muestra un mensaje si la lista de datos está vacía
             return const Center(
-              child: Text('No hay códigos QR disponibles.'),
+              child: Text('No hay tarjetas de presentación disponibles.'),
             );
           }
         } else {
-          // Por si acaso el estado no es ninguno de los esperados
           return const Center(
             child: Text('Estado inesperado'),
           );

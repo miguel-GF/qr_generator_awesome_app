@@ -52,31 +52,35 @@ class _BusinessCardCreateStepTwoScreenState
   };
 
   void _submit() {
-    BoxDecoration decoration;
+    // BoxDecoration decoration;
 
-    if (isGradient && selectedDirection == 'centerOut') {
-      decoration = BoxDecoration(
-        gradient: RadialGradient(
-          colors: [color1, color2],
-          center: Alignment.center,
-          radius: 1.0,
-        ),
-      );
-    } else if (isGradient) {
-      decoration = BoxDecoration(
-        gradient: LinearGradient(
-          colors: [color1, color2],
-          begin: _beginAlignments[selectedDirection]!,
-          end: _endAlignments[selectedDirection]!,
-        ),
-      );
-    } else {
-      decoration = BoxDecoration(color: color1);
-    }
+    // if (isGradient && selectedDirection == 'centerOut') {
+    //   decoration = BoxDecoration(
+    //     gradient: RadialGradient(
+    //       colors: [color1, color2],
+    //       center: Alignment.center,
+    //       radius: 1.0,
+    //     ),
+    //   );
+    // } else if (isGradient) {
+    //   decoration = BoxDecoration(
+    //     gradient: LinearGradient(
+    //       colors: [color1, color2],
+    //       begin: _beginAlignments[selectedDirection]!,
+    //       end: _endAlignments[selectedDirection]!,
+    //     ),
+    //   );
+    // } else {
+    //   decoration = BoxDecoration(color: color1);
+    // }
 
-    Get.toNamed(nameCreateBusinessCardStepTwo, arguments: <String, dynamic>{
+    Get.toNamed(nameCreateBusinessCardStepThree, arguments: <String, dynamic>{
       'cardQrCodeStepOne': cardQrCodeStepOne.toJson(),
-      'decorationStepTwo': decoration,
+      // 'decorationStepTwo': decoration,
+      'isGradient': isGradient,
+      'color1Value': color1.value, // Pasa el valor entero del color
+      'color2Value': color2.value, // Pasa el valor entero del color
+      'selectedDirection': selectedDirection,
     });
   }
 
@@ -112,7 +116,7 @@ class _BusinessCardCreateStepTwoScreenState
           );
 
     return Scaffold(
-      appBar: AppBar(title: Text('2. Seleccionar fondo')),
+      appBar: AppBar(title: Text('2. Seleccionar Fondo')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -218,7 +222,7 @@ class _BusinessCardCreateStepTwoScreenState
       // BottomNavigationBar con el botón de siguiente
       bottomNavigationBar: Visibility(
         child: BottomBarWidget(
-          labelBtn: 'Checar',
+          labelBtn: 'Siguiente',
           function: _submit,
         ),
       ),

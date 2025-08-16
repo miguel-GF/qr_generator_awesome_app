@@ -6,6 +6,7 @@ import './qr_code/l10n_tab_favorite.dart';
 import './locale/l10n_locale_countries.dart';
 import './settings/l10n_settings.dart';
 import './cards/l10n_card_create_step_one.dart';
+import './business_card/l10n_business_card_create_success.dart';
 
 class L10n extends Translations {
   @override
@@ -23,6 +24,7 @@ class L10n extends Translations {
           ...l10nLocaleCountries['en_US']!,
           ...l10nSettings['en_US']!,
           ...l10nCardCreateStepOne['en_US']!,
+          ...l10nBusinessCardCreateSuccess['en_US']!,
         },
         'es_MX': {
           'titleHome': 'Qr Generator Awesome',
@@ -37,6 +39,7 @@ class L10n extends Translations {
           ...l10nLocaleCountries['es_MX']!,
           ...l10nSettings['es_MX']!,
           ...l10nCardCreateStepOne['es_MX']!,
+          ...l10nBusinessCardCreateSuccess['es_MX']!,
         },
       };
 }

@@ -4,6 +4,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../../features/qr_code/data/data_sources/local/qr_code_database_helper.dart';
+import 'business_card_database_helper.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._();
@@ -42,7 +43,10 @@ class DatabaseHelper {
 
   // Creación inicial de la base de datos
   Future<void> _onCreate(Database db, int version) async {
+    // Crea la nueva tabla de QR codes
     await QrCodeDatabaseHelper().createQrCodeTable(db);
+    // Crea la nueva tabla de Business Cards
+    await BusinessCardDatabaseHelper().createBusinessCardTable(db);
   }
 
   // Manejo de la actualización del esquema de la base de datos

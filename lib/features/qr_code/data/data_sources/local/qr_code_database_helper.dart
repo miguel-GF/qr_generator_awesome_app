@@ -102,4 +102,25 @@ class QrCodeDatabaseHelper {
       [favorite, id], // Valores para los placeholders `?`
     );
   }
+
+  // Nuevo método para obtener un QR Code por su ID
+  Future<QrCodeModel?> getQrCodeById(String id) async {
+    final Database? db = await DatabaseHelper().database;
+    if (db == null) {
+      // O lanzas una excepción o manejas el caso de DB no inicializada
+      print('Database is not initialized when trying to get QrCode by ID.');
+      return null;
+    }
+    final List<Map<String, dynamic>> maps = await db.query(
+      tableQrCode, // Asume que tableQrCode está definido en este archivo
+      where: 'id = ?',
+      whereArgs: [id],
+      limit: 1, // Esperamos solo un resultado
+    );
+
+    if (maps.isNotEmpty) {
+      return QrCodeModel.fromJson(maps.first);
+    }
+    return null; // Retorna null si no se encuentra el QR Code
+  }
 }
